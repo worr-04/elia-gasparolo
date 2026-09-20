@@ -40,11 +40,17 @@ const works = t.home.works.map((work, index) => ({ ...work, image: images[index]
       padding: 8svh  1.5rem;
     }
   }
+  @media (max-width: 600px) {
+    .home {
+      /* arriba desde el header | laterales | abajo */
+      padding: clamp(3rem, 8svh, 5rem) 4vw 1.5rem;
+    }
+  }
   @media (min-width: 900px) {
     .home {
       align-items: center;
-      /* 14% por lado deja un área de obra 20% más grande que con márgenes de 20% */
-      padding: 14svh 14%;
+      /* reduce los márgenes para dar a la obra ~20% más de espacio útil */
+      padding: 7svh 7%;
     }
   }
 </style>

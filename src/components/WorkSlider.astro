@@ -96,10 +96,15 @@ const { works, label, empty, emptyDetail } = Astro.props;
     .slider { height: 42svh; }
   }
 
+  @media (max-width: 600px) {
+    .slider { height: 100%; padding-bottom: 3.5rem; }
+    .viewport, .track { height: 100%; }
+  }
+
   @media (min-width: 900px) {
     .slider { height: auto; padding-bottom: 4rem; width: 100%; }
     .viewport { height: auto; }
-    .track { aspect-ratio: 4 / 3; height: auto; margin-inline: auto; max-height: calc(72svh - 4rem); }
+    .track { aspect-ratio: 4 / 3; height: auto; margin-inline: auto; max-height: calc(86svh - 4rem); }
     .artwork { height: 100%; width: 100%; }
     .slide :global(img) { height: 100%; object-fit: cover; width: 100%; }
   }
