@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkSlider from '../../components/WorkSlider.astro';
+import { copy, languages, type Language } from '../../i18n';
+import tejidoConectivo from '../../assets/home-optimized/01-tejido-conectivo.webp';
+import collarDeMandarinas from '../../assets/home-optimized/02-collar-de-mandarinas.webp';
+import laPropension from '../../assets/home-optimized/03-la-propension.webp';
+import reliquias from '../../assets/home-optimized/04-reliquias.webp';
+import intocable from '../../assets/home-optimized/05-intocable.webp';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Language;
+const t = copy[lang];
+
+const images = [tejidoConectivo, collarDeMandarinas, laPropension, reliquias, intocable];
+const works = t.home.works.map((work, index) => ({ ...work, image: images[index] }));
+---
+
+<BaseLayout lang={lang} fullViewport>
+  <div class="home">
+    <WorkSlider
+      works={works}
+      label={t.home.sliderLabel}
+      empty={t.home.empty}
+      emptyDetail={t.home.emptyDetail}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .home { align-items: center; display: flex; height: 100%; justify-content: center; overflow: hidden; padding: clamp(2rem, 4.5vw, 5rem); }
+  @media (max-width: 899px) {
+    .home {
+      align-items: flex-start;
+      min-height: 0;
+      /* arriba (separación del header) | laterales | abajo */
+      padding: 8svh  1.5rem;
+    }
+  }
+  @media (min-width: 900px) {
+    .home {
+      align-items: center;
+      /* 14% por lado deja un área de obra 20% más grande que con márgenes de 20% */
+      padding: 14svh 14%;
+    }
+  }
+</style>

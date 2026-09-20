@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import type { Language } from '../i18n';
+
+interface Props {
+  lang: Language;
+  title?: string;
+  fullViewport?: boolean;
+}
+
+const { lang, title = 'Elia Gasparolo', fullViewport = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Elia Gasparolo — diseñadora." />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class:list={{ 'site-shell': true, 'full-viewport': fullViewport }}>
+      <Header lang={lang} />
+      <main id="main-content">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  .site-shell {
+    min-height: 100svh;
+  }
+
+  main { margin-left: 20%; min-width: 0; width: 80%; }
+
+  .full-viewport { height: 100svh; overflow: hidden; }
+
+  .full-viewport main { height: 100%; }
+
+  @media (max-width: 899px) {
+    .site-shell {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main { margin-left: 0; order: 2; width: 100%; }
+
+    .full-viewport main { flex: 1; height: auto; min-height: 0; }
+  }
+</style>
