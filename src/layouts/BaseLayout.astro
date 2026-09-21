@@ -51,4 +51,8 @@ const { lang, title = 'Elia Gasparolo', fullViewport = false } = Astro.props;
 
     .full-viewport main { flex: 1; height: auto; min-height: 0; }
   }
+
+  @media (max-width: 600px) and (orientation: landscape) {
+    .full-viewport main { overflow-y: auto; }
+  }
 </style>

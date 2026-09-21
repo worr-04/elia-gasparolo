@@ -46,6 +46,14 @@ const works = t.home.works.map((work, index) => ({ ...work, image: images[index]
       padding: clamp(3rem, 8svh, 5rem) 4vw 1.5rem;
     }
   }
+  @media (max-width: 600px) and (orientation: landscape) {
+    .home {
+      height: auto;
+      min-height: 100%;
+      overflow: visible;
+      padding-top: 3rem;
+    }
+  }
   @media (min-width: 900px) {
     .home {
       align-items: center;

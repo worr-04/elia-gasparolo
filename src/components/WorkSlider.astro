@@ -101,6 +101,10 @@ const { works, label, empty, emptyDetail } = Astro.props;
     .viewport, .track { height: 100%; }
   }
 
+  @media (max-width: 600px) and (orientation: landscape) {
+    .slider { height: 22rem; }
+  }
+
   @media (min-width: 900px) {
     .slider { height: auto; padding-bottom: 4rem; width: 100%; }
     .viewport { height: auto; }

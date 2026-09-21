@@ -6,8 +6,6 @@ interface Props { lang: Language; }
 const { lang } = Astro.props;
 const t = copy[lang];
 const base = import.meta.env.BASE_URL;
-const otherLang: Language = lang === 'es' ? 'en' : 'es';
-const otherLangLabel = otherLang.toUpperCase();
 const nav = [
   ['bio', t.navigation.bio],
   ['statement', t.navigation.statement],
@@ -28,13 +26,13 @@ const nav = [
     <ul>
       {nav.map(([slug, label]) => <li><a href={`${base}${lang}/${slug}/`}>{label}</a></li>)}
     </ul>
-    <a class="language mobile-language" href={`${base}${otherLang}/`} aria-label={`Cambiar idioma a ${otherLangLabel}`}>
-      <span class:list={{ active: lang === 'es' }}>ES</span><span aria-hidden="true"> / </span><span class:list={{ active: lang === 'en' }}>EN</span>
-    </a>
+    <div class="language mobile-language" aria-label="Cambiar idioma">
+      <a class:list={{ active: lang === 'es' }} href={`${base}es/`}>ES</a><span aria-hidden="true"> / </span><a class:list={{ active: lang === 'en' }} href={`${base}en/`}>EN</a>
+    </div>
   </nav>
-  <a class="language" href={`${base}${otherLang}/`} aria-label={`Cambiar idioma a ${otherLangLabel}`}>
-    <span class:list={{ active: lang === 'es' }}>ES</span><span aria-hidden="true"> / </span><span class:list={{ active: lang === 'en' }}>EN</span>
-  </a>
+  <div class="language" aria-label="Cambiar idioma">
+    <a class:list={{ active: lang === 'es' }} href={`${base}es/`}>ES</a><span aria-hidden="true"> / </span><a class:list={{ active: lang === 'en' }} href={`${base}en/`}>EN</a>
+  </div>
 </header>
 
 <script>
@@ -90,7 +88,7 @@ const nav = [
     .language { position: absolute; right: 1.5rem; top: 1.35rem; }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 899px) {
     .site-header { align-items: flex-start; display: flex; padding: 1.25rem 4vw; z-index: 3; }
     .menu-toggle { background: transparent; border: 0; cursor: pointer; display: grid; padding: .3rem 0 .3rem .6rem; position: absolute; right: 4vw; top: 1.15rem; z-index: 4; }
     .menu-lines { display: grid; gap: .28rem; width: 1.35rem; }
