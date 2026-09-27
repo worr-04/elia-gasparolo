@@ -346,8 +346,8 @@ export const works: Work[] = [
     "id": "17",
     "slug": "messier-m22-m30",
     "title": {
-      "es": "M22 y M30",
-      "en": "M22 and M30"
+      "es": "Messier",
+      "en": "Messier"
     },
     "body": {
       "es": "M22 y M30 \nEn el siglo XVIII, el astrónomo Charles Messier trazó un catálogo de objetos difusos para fijar coordenadas en la vastedad del cielo. Entre ellos registró los cúmulos globulares: auténticas familias estelares nacidas de un mismo colapso primordial, compuestas por estrellas hermanas que emergieron de una misma nube y permanecen unidas por la gravedad.\nEstas obras toman dicha taxonomía astronómica como un archivo abierto. Cada pieza aborda un cúmulo del catálogo —como la trama enjambrada de M22 en la constelación de Sagitario o el núcleo denso de M30 en la constelación de Capricornio— para traducir sobre la superficie textil la memoria de ese origen colectivo.\nEn el bordado, cada punto es una estrella y cada hilo encarna la fuerza invisible que las conecta: una trama de tensiones donde la distancia es también una forma de presencia. El tiempo cósmico se vuelve tiempo manual, inscribiendo en la materia una escala temporal que nos excede mediante la lentitud de cada puntada.\n\nTítulo: M22\nTécnica: Bordado con hilos de lurex sobre servilleta\nMedidas: 26 x 26 cm\nAño: 2026\n\nTítulo: M30\nTécnica: Bordado con hilos de lurex sobre silobolsa\nMedidas: 33,5 x 47 cm\nAño: 2026",
