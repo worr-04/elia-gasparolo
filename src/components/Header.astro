@@ -9,6 +9,7 @@ const base = import.meta.env.BASE_URL;
 const localPath = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) : Astro.url.pathname.slice(1);
 const pageSuffix = localPath.replace(/^(es|en)\/?/, '');
 const languageHref = (target: Language) => `${base}${target}/${pageSuffix}`;
+const isCurrentPage = (slug: string) => pageSuffix === `${slug}/` || pageSuffix === slug;
 const nav = [
   ['bio', t.navigation.bio],
   ['obras', t.navigation.works],
@@ -26,7 +27,7 @@ const nav = [
   </button>
   <nav id="mobile-navigation" aria-label="Navegación principal">
     <ul>
-      {nav.map(([slug, label]) => <li><a href={`${base}${lang}/${slug}/`}>{label}</a></li>)}
+      {nav.map(([slug, label]) => <li><a href={`${base}${lang}/${slug}/`} aria-current={isCurrentPage(slug) ? 'page' : undefined}>{label}</a></li>)}
     </ul>
     <div class="language mobile-language" aria-label="Cambiar idioma">
       <a class:list={{ active: lang === 'es' }} href={languageHref('es')}>ES</a><span aria-hidden="true"> / </span><a class:list={{ active: lang === 'en' }} href={languageHref('en')}>EN</a>

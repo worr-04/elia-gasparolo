@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://worr-04.github.io/elia-gasparolo/sitemap.xml

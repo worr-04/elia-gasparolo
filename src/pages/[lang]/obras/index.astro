@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { copy, isLanguage, languages } from '../../../i18n';
+import { works } from '../../../works-content';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang = isLanguage(langParam) ? langParam : 'es';
+const base = import.meta.env.BASE_URL;
+const layouts: Record<string, 'standard' | 'portrait' | 'feature'> = {
+  reliquias: 'feature',
+  'la-propension': 'portrait',
+  'la-complicidad-de-los-dupiones': 'portrait',
+  trazas: 'standard',
+  'fases-y-despliegue': 'portrait',
+  derivas: 'standard',
+  transitos: 'feature',
+  ofrendas: 'standard',
+  'tejido-conectivo': 'portrait',
+  'instalacion-tejido-conectivo': 'portrait',
+  'luz-ambar': 'portrait',
+  'tejido-conectivo-ii': 'standard',
+  'algol-eclipse': 'portrait',
+  avyakta: 'standard',
+  gravitacion: 'portrait',
+  'sirio-el-ojo-en-el-cielo': 'portrait',
+  'messier-m22-m30': 'feature',
+  'cartografias-posibles': 'standard',
+  'el-futuro-es-prehistoria': 'standard',
+  intocable: 'portrait',
+  'destellos-de-naturaleza': 'standard',
+  'paisajes-posibles': 'standard',
+  'entonces-la-proteccion': 'feature',
+  'los-amantes': 'portrait',
+  'the-right-to-memory': 'standard',
+};
+const numberedWorks = works.map((work, index) => ({ work, index }));
+const masonryColumns = [0, 1, 2].map((column) => numberedWorks.filter(({ index }) => index % 3 === column));
+const responsiveMasonryColumns = [0, 1].map((column) => numberedWorks.filter(({ index }) => index % 2 === column));
+---
+
+<BaseLayout lang={lang} title={`${copy[lang].navigation.works} — Elia Gasparolo`}>
+  <article class="works-page">
+    <h1 class="works-title">{copy[lang].navigation.works}</h1>
+
+    <div class="works-layout">
+      <div class="works-grid works-grid--masonry">
+        {masonryColumns.map((column) => (
+          <div class="masonry-column">
+            {column.map(({ work, index }) => (
+              <article class:list={{ 'work-card': true, [layouts[work.slug]]: true }} data-work={work.slug}>
+                <span class="work-number" aria-hidden="true">{index + 1}.</span>
+                <a class="work-image" href={`${base}${lang}/obras/${work.slug}/`} aria-label={work.title[lang]} data-work-trigger={work.slug}>
+                  <img src={`${base}${work.images[0]}`} alt={work.title[lang]} loading="lazy" />
+                </a>
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="works-grid works-grid--responsive">
+        {responsiveMasonryColumns.map((column) => (
+          <div class="masonry-column">
+            {column.map(({ work, index }) => (
+              <article class:list={{ 'work-card': true, [layouts[work.slug]]: true }} data-work={work.slug}>
+                <span class="work-number" aria-hidden="true">{index + 1}.</span>
+                <a class="work-image" href={`${base}${lang}/obras/${work.slug}/`} aria-label={work.title[lang]} data-work-trigger={work.slug}>
+                  <img src={`${base}${work.images[0]}`} alt={work.title[lang]} loading="lazy" />
+                </a>
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <aside class="works-index" aria-label={copy[lang].navigation.works}>
+        <ol class="works-legend">
+          {works.map((work, index) => (
+            <li data-work={work.slug}>
+              <span>{index + 1}.</span>
+              <a href={`${base}${lang}/obras/${work.slug}/`} data-work-trigger={work.slug}>{work.title[lang]}</a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.works-page').forEach((page) => {
+    const linked = page.querySelectorAll<HTMLElement>('[data-work]');
+    const setHighlight = (slug?: string) => linked.forEach((item) => item.classList.toggle('is-highlighted', item.dataset.work === slug));
+
+    page.querySelectorAll<HTMLElement>('[data-work-trigger]').forEach((trigger) => {
+      const slug = trigger.dataset.workTrigger;
+      trigger.addEventListener('pointerenter', () => setHighlight(slug));
+      trigger.addEventListener('pointerleave', () => setHighlight());
+      trigger.addEventListener('focus', () => setHighlight(slug));
+      trigger.addEventListener('blur', () => setHighlight());
+    });
+  });
+</script>
+
+<style>
+  .works-page { margin: 0; max-width: none; padding: clamp(1.5rem, 3vw, 3.5rem); }
+  .works-title { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; margin: 0 0 clamp(2rem, 4vw, 4rem); }
+  .works-layout { align-items: start; display: grid; gap: clamp(1.5rem, 3vw, 3.5rem); grid-template-columns: minmax(0, 4fr) minmax(12rem, 1fr); }
+  .works-grid { --mosaic-gap: clamp(.9rem, 1.6vw, 1.6rem); justify-self: center; max-width: 78rem; width: 100%; }
+  .works-grid--masonry { display: grid; gap: var(--mosaic-gap); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .works-grid--responsive { display: none; }
+  .masonry-column { display: grid; align-content: start; gap: var(--mosaic-gap); }
+  .work-card { padding-top: .9rem; position: relative; width: 100%; }
+  .work-image { color: inherit; display: block; text-decoration: none; }
+  .work-number { color: var(--ink); font-size: .72rem; left: 0; line-height: 1; position: absolute; top: 0; }
+  .work-image { display: block; }
+  .work-card img { display: block; height: auto; transition: filter .18s ease, opacity .18s ease; width: 100%; }
+  .work-image:hover img, .work-image:focus-visible img { opacity: .9; }
+  .work-image:focus-visible { outline: 1px solid currentColor; outline-offset: .35rem; }
+  .work-card.is-highlighted img { filter: brightness(.9); }
+  .works-index { border-left: 1px solid var(--line); height: calc(100svh - clamp(3rem, 6vw, 7rem)); padding-left: clamp(1.25rem, 2.5vw, 3rem); position: sticky; top: clamp(1.5rem, 3vw, 3.5rem); }
+  .works-legend { color: #6e7357; display: block; font-size: clamp(.72rem, .8vw, .88rem); line-height: 1.55; list-style: none; margin: 0; padding: 0; }
+  .works-legend li { display: inline; transition: color .18s ease, opacity .18s ease; }
+  .works-legend li:not(:last-child)::after { color: var(--line); content: ' · '; }
+  .works-legend span { color: var(--ink); margin-right: .15rem; }
+  .works-legend a { color: inherit; text-decoration: none; }
+  .works-legend a:hover, .works-legend a:focus-visible { text-decoration: underline; text-underline-offset: .15em; }
+  .works-legend li.is-highlighted { background: rgba(110, 115, 87, .22); color: var(--ink); opacity: 1; }
+  .work-card.feature { grid-column: span 1; }
+  @media (max-width: 899px) { .works-page { padding: 2.5rem 4vw 4rem; } .works-layout { grid-template-columns: 1fr; } .works-grid--masonry { display: none; } .works-grid--responsive { display: grid; gap: var(--mosaic-gap); grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 53rem; } .works-grid--responsive .masonry-column { gap: var(--mosaic-gap); } .works-index { border-left: 0; border-top: 1px solid var(--line); height: auto; padding: 2rem 0 0; position: static; } }
+  @media (max-width: 600px) { .works-grid--responsive { --mosaic-gap: .75rem; max-width: none; width: 92%; } }
+</style>
