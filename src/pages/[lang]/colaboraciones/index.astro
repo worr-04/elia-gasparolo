@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { designContent } from '../../../design-content';
+import { isLanguage, languages, type Language } from '../../../i18n';
+import altar01 from '../../../assets/design-realization/altar-01.webp';
+import altar02 from '../../../assets/design-realization/altar-02.webp';
+import altar03 from '../../../assets/design-realization/altar-03.webp';
+import glaciator01 from '../../../assets/design-realization/glaciator-01.webp';
+import glaciator02 from '../../../assets/design-realization/glaciator-02.webp';
+import libro01 from '../../../assets/design-realization/libro-01.webp';
+import libro02 from '../../../assets/design-realization/libro-02.webp';
+import libro03 from '../../../assets/design-realization/libro-03.webp';
+import libro04 from '../../../assets/design-realization/libro-04.webp';
+import libro05 from '../../../assets/design-realization/libro-05.webp';
+import nube01 from '../../../assets/design-realization/nube-01.webp';
+import origen01 from '../../../assets/design-realization/origen-01.webp';
+import origen02 from '../../../assets/design-realization/origen-02.webp';
+import pijama01 from '../../../assets/design-realization/pijama-01.webp';
+import pijama02 from '../../../assets/design-realization/pijama-02.webp';
+import pijama03 from '../../../assets/design-realization/pijama-03.webp';
+import pijama04 from '../../../assets/design-realization/pijama-04.webp';
+import pijama05 from '../../../assets/design-realization/pijama-05.webp';
+import pijama06 from '../../../assets/design-realization/pijama-06.webp';
+import rabdomante01 from '../../../assets/design-realization/rabdomante-01.webp';
+import rabdomante02 from '../../../assets/design-realization/rabdomante-02.webp';
+import rabdomante03 from '../../../assets/design-realization/rabdomante-03.webp';
+import robotika01 from '../../../assets/design-realization/robotika-01.webp';
+import robotika02 from '../../../assets/design-realization/robotika-02.webp';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const requestedLang = Astro.params.lang;
+const lang: Language = isLanguage(requestedLang) ? requestedLang : 'es';
+const t = designContent[lang];
+const projects = [
+  ['nube', [nube01]],
+  ['pijama', [pijama01, pijama02, pijama03, pijama04, pijama05, pijama06]],
+  ['origen', [origen01, origen02]],
+  ['rabdomante', [rabdomante01, rabdomante02, rabdomante03]],
+  ['robotika', [robotika01, robotika02]],
+  ['libro', [libro01, libro02, libro03, libro04, libro05]],
+  ['glaciator', [glaciator01, glaciator02]],
+  ['altar', [altar01, altar02, altar03]],
+] as const;
+---
+
+<BaseLayout lang={lang} title={`Elia Gasparolo — ${t.title}`}>
+  <article class="design-page">
+    <h1>{t.title}</h1>
+
+    <div class="projects">
+      {projects.map(([id, images]) => {
+        const project = t.projects[id];
+        const splitAt = Math.ceil(images.length / 2);
+        const galleryColumns = [images.slice(0, splitAt), images.slice(splitAt)].filter((column) => column.length);
+        return (
+          <section class="project" aria-labelledby={`${id}-title`}>
+            <div class="project-copy">
+              <h2 id={`${id}-title`}>{project.title}</h2>
+              {project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              <p class="credit">{project.credit}{project.year && `, ${project.year}`}</p>
+              {project.videoUrl && <a class="video-link" href={project.videoUrl} target="_blank" rel="noopener noreferrer">{t.videoLabel}</a>}
+            </div>
+
+            <div class="gallery">
+              {galleryColumns.map((column, columnIndex) => (
+                <div class="gallery-column">
+                  {column.map((image, index) => (
+                    <figure>
+                      <Image src={image} alt={`${project.title} — ${columnIndex * splitAt + index + 1}`} widths={[640, 960, 1280, 1920]} sizes="(max-width: 899px) 92vw, 36vw" loading={id === 'nube' && index === 0 ? 'eager' : 'lazy'} />
+                    </figure>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div class="mobile-gallery" aria-label={`Imágenes de ${project.title}`}>
+              {images.map((image, index) => (
+                <figure>
+                  <Image src={image} alt={`${project.title} — ${index + 1}`} widths={[640, 960, 1280]} sizes="84vw" loading={id === 'nube' && index === 0 ? 'eager' : 'lazy'} />
+                </figure>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .design-page { margin: 0 auto; max-width: 110rem; padding: clamp(2rem, 5vw, 5rem); }
+  h1 { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; margin: 0 0 clamp(3rem, 8vw, 8rem); }
+  .projects { display: grid; gap: clamp(5rem, 12vw, 12rem); }
+  .project { border-top: 1px solid var(--line); display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: minmax(12rem, .6fr) minmax(0, 1.4fr); padding-top: 1.1rem; }
+  .project-copy { max-width: 24rem; }
+  h2 { font-size: clamp(1rem, 1.25vw, 1.25rem); font-weight: 500; letter-spacing: -.02em; margin: 0 0 1.2rem; }
+  p { font-size: clamp(.78rem, .82vw, .92rem); line-height: 1.6; margin: 0; }
+  p + p { margin-top: 1rem; }
+  .credit { font-size: .72rem; line-height: 1.5; margin-top: 1.4rem; }
+  .video-link { border-bottom: 1px solid currentColor; display: inline-block; font-size: .75rem; margin-top: 1.4rem; padding-bottom: .15rem; }
+  .gallery { align-items: start; display: grid; gap: clamp(.75rem, 1.5vw, 1.5rem); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-column { align-content: start; display: grid; gap: clamp(.75rem, 1.5vw, 1.5rem); }
+  figure { margin: 0; }
+  figure :global(img) { display: block; height: auto; width: 100%; }
+  .mobile-gallery { display: none; }
+
+  @media (max-width: 899px) {
+    .design-page { padding: 2.5rem 4vw 4rem; }
+    h1 { margin-bottom: 3.5rem; }
+    .projects { gap: 5rem; }
+    .project { gap: 2rem; grid-template-columns: 1fr; }
+    .project-copy { max-width: 42rem; }
+  }
+
+  @media (max-width: 600px) {
+    .gallery { display: none; }
+    .mobile-gallery { display: flex; gap: .75rem; margin-inline: -4vw; overflow-x: auto; padding: 0 4vw .5rem; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+    .mobile-gallery figure { flex: 0 0 84vw; scroll-snap-align: start; }
+  }
+</style>

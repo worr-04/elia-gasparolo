@@ -31,21 +31,36 @@ const works = t.home.works.map((work, index) => ({ ...work, image: images[index]
 </BaseLayout>
 
 <style>
+  /* Base compartida por todas las pantallas. */
   .home { align-items: center; display: flex; height: 100%; justify-content: center; overflow: hidden; padding: clamp(2rem, 4.5vw, 5rem); }
+
+  /* Tablet y mobile: hasta 899 px. */
   @media (max-width: 899px) {
     .home {
       align-items: flex-start;
       min-height: 0;
       /* arriba (separación del header) | laterales | abajo */
-      padding: 8svh  1.5rem;
+      padding: 2svh  12rem;
     }
   }
+
+  /* Solo tablet: de 601 px a 899 px. */
+  @media (min-width: 601px) and (max-width: 899px) {
+    .home {
+      /* arriba desde el header | laterales | abajo */
+      padding: 4svh 4% 8svh;
+    }
+  }
+
+  /* Solo mobile vertical: hasta 600 px. */
   @media (max-width: 600px) {
     .home {
       /* arriba desde el header | laterales | abajo */
       padding: clamp(3rem, 8svh, 5rem) 4vw 1.5rem;
     }
   }
+
+  /* Solo mobile horizontal: hasta 600 px y teléfono girado. */
   @media (max-width: 600px) and (orientation: landscape) {
     .home {
       height: auto;
@@ -54,11 +69,14 @@ const works = t.home.works.map((work, index) => ({ ...work, image: images[index]
       padding-top: 3rem;
     }
   }
+
+  /* Solo desktop: desde 900 px. */
   @media (min-width: 900px) {
     .home {
       align-items: center;
       /* reduce los márgenes para dar a la obra ~20% más de espacio útil */
-      padding: 7svh 7%;
+      /* arriba (igual al header) | derecha | abajo | izquierda */
+      padding: clamp(4rem, 12vw, 3.5rem) 12% 6svh 12%;
     }
   }
 </style>

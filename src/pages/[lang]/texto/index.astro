@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { isLanguage, languages } from '../../../i18n';
+import { textContent, textItems } from '../../../text-content';
+
+import destellos from '../../../assets/texts/destellos.webp';
+import memoriaFragmentada from '../../../assets/texts/memoria-fragmentada.webp';
+import ofrendas from '../../../assets/texts/ofrendas.webp';
+import reliquias from '../../../assets/texts/reliquias.webp';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang = isLanguage(langParam) ? langParam : 'es';
+const copy = textContent[lang];
+const base = import.meta.env.BASE_URL;
+const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas, reliquias } as const;
+---
+
+<BaseLayout lang={lang} title={`${copy.title} — Elia Gasparolo`}>
+  <article class="texts-page">
+    <h1>{copy.title}</h1>
+
+    <div class="texts-list">
+      {textItems.map((item) => {
+        const image = images[item.image as keyof typeof images];
+        return (
+          <article class="text-item">
+            <img src={image.src} width={image.width} height={image.height} alt={`Obra vinculada a ${item.title[lang]}`} loading="lazy" />
+            <div class="text-details">
+              <p class="credit">{item.author} · {item.year}</p>
+              <h2>{item.title[lang]}</h2>
+              <div class="links">
+                <a href={`${base}${item.files[lang]}`} target="_blank" rel="noopener noreferrer">{copy.readLabel} <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .texts-page { margin: 0 auto; max-width: 110rem; padding: clamp(2rem, 5vw, 5rem); }
+  h1 { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; margin: 0 0 clamp(3rem, 8vw, 8rem); }
+  .texts-list { border-top: 1px solid rgba(25, 25, 24, .14); }
+  .text-item { align-items: start; border-bottom: 1px solid rgba(25, 25, 24, .14); display: grid; gap: 1.25rem clamp(1.25rem, 3vw, 3.5rem); grid-template-columns: minmax(11rem, 25%) 1fr; padding: clamp(1.25rem, 2.5vw, 2.75rem) 0; }
+  .credit { font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; }
+  .text-item img { display: block; height: auto; width: 100%; }
+  .text-details { align-self: stretch; display: flex; flex-direction: column; }
+  .credit { margin: 0 0 .8rem; }
+  h2 { font-size: clamp(1.45rem, 2.7vw, 3.2rem); font-weight: 400; letter-spacing: -.05em; line-height: .98; margin: 0; }
+  .links { margin-top: auto; padding-top: 2rem; }
+  .links a { border-bottom: 1px solid currentColor; color: inherit; font-size: .85rem; padding-bottom: .14rem; text-decoration: none; }
+  .links a:hover { opacity: .55; }
+  @media (max-width: 899px) { .texts-page { padding: 2.5rem 4vw 4rem; } h1 { margin-bottom: 3.5rem; } }
+  @media (max-width: 600px) { .text-item { grid-template-columns: 1fr; } }
+</style>

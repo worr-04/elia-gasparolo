@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { isLanguage, languages } from '../../../i18n';
+import { pressContent, pressItems } from '../../../press-content';
+
+import image01 from '../../../assets/press/01 -El arte está de moda (y viceversa)_ 5 muestras imperdibles que lo demuestran - Ohlalá.webp';
+import image02 from '../../../assets/press/02- Tiempo Argentino.webp';
+import image03 from '../../../assets/press/03- Infobae 2026.webp';
+import image04 from '../../../assets/press/04- Biomateriales_ la agricultura del futuro - The Praxis Journal.webp';
+import image05 from '../../../assets/press/05- Agenda Porteña.webp';
+import image06 from '../../../assets/press/06 - lofficiel.png.webp';
+import image07 from '../../../assets/press/07- Sculpture Magazine.webp';
+import image08 from '../../../assets/press/08- Biotextiles con memoria de Elia Gasparolo - Arte-Online.webp';
+import image09 from '../../../assets/press/09- La Nacion.webp';
+import image092 from '../../../assets/press/092- La Nacion II.webp';
+import image093 from '../../../assets/press/093- La Nacion III.webp';
+import image10 from '../../../assets/press/10 - Revista Ñ. Ofrendas .webp';
+import image11 from '../../../assets/press/11 - Moda y arte_ descubrí la colección sustentable y sin huella de carbono que asombra a Buenos Aires _ EPU.webp';
+import image12 from '../../../assets/press/12- Captura Saco.webp';
+import image13 from '../../../assets/press/13 - ohlala.webp';
+import image14 from '../../../assets/press/14 - ohlala.webp';
+import image15 from '../../../assets/press/15- arte-conectados.webp';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang = isLanguage(langParam) ? langParam : 'es';
+const copy = pressContent[lang];
+const images = { '01': image01, '02': image02, '03': image03, '04': image04, '05': image05, '06': image06, '07': image07, '08': image08, '09': image09, '092': image092, '093': image093, '10': image10, '11': image11, '12': image12, '13': image13, '14': image14, '15': image15 } as const;
+---
+
+<BaseLayout lang={lang} title={`${copy.title} — Elia Gasparolo`}>
+  <article class="press-page">
+    <h1>{copy.title}</h1>
+    <div class="press-grid">
+      {pressItems.map((item) => {
+        const image = images[item.image as keyof typeof images];
+        const supplementaryImages = item.supplementaryImages?.map((name) => images[name as keyof typeof images]);
+        return (
+          <article class="card">
+            <div class:list={{ 'card-images': true, multiple: Boolean(supplementaryImages?.length) }}>
+              <img src={image.src} width={image.width} height={image.height} alt={`Captura de ${item.publication}`} loading="lazy" />
+              {supplementaryImages?.map((supplementary, supplementaryIndex) => (
+                <img src={supplementary.src} width={supplementary.width} height={supplementary.height} alt={`Página ${supplementaryIndex + 2} de la nota de ${item.publication}`} loading="lazy" />
+              ))}
+            </div>
+            <div class="card-content">
+              <p class="publication">{item.publication}{item.year && <span> · {item.year}</span>}</p>
+              <h2>{item.title}</h2>
+              <a class="visit-link" href={item.href} target="_blank" rel="noopener noreferrer">{copy.visitLabel} <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .press-page { margin: 0 auto; max-width: 110rem; padding: clamp(2rem, 5vw, 5rem); }
+  h1 { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; margin: 0 0 clamp(3rem, 8vw, 8rem); }
+  .press-grid { border-top: 1px solid rgba(25, 25, 24, .14); }
+  .card { align-items: start; border-bottom: 1px solid rgba(25, 25, 24, .14); display: grid; gap: 1.25rem clamp(1.25rem, 3vw, 3.5rem); grid-template-columns: minmax(11rem, 25%) 1fr; padding: clamp(1.25rem, 2.5vw, 2.75rem) 0; }
+  .publication { font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; }
+  .card-images { margin: 0; }
+  .card-images.multiple { display: grid; gap: .35rem; grid-template-columns: 1fr; }
+  .card-images img { display: block; height: auto; width: 100%; }
+  .card-content { align-self: stretch; display: flex; flex-direction: column; }
+  .publication { margin: 0 0 .8rem; }
+  h2 { font-size: clamp(1.45rem, 2.7vw, 3.2rem); font-weight: 400; letter-spacing: -.05em; line-height: .98; margin: 0; }
+  .visit-link { border-bottom: 1px solid currentColor; color: inherit; font-size: .85rem; margin-top: auto; padding-top: 2rem; padding-bottom: .14rem; text-decoration: none; width: fit-content; }
+  .visit-link:hover { opacity: .55; }
+  @media (max-width: 899px) { .press-page { padding: 2.5rem 4vw 4rem; } h1 { margin-bottom: 3.5rem; } }
+  @media (max-width: 600px) { .card { grid-template-columns: 1fr; } }
+</style>

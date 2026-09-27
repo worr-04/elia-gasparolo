@@ -58,7 +58,16 @@ const { works, label, empty, emptyDetail } = Astro.props;
     const syncCaptions = () => {
       slider.querySelectorAll<HTMLImageElement>('[data-work-image]').forEach((image) => {
         const caption = image.parentElement?.querySelector<HTMLElement>('[data-caption]');
-        if (caption) caption.style.width = `${image.getBoundingClientRect().width}px`;
+        if (!caption) return;
+
+        const box = image.getBoundingClientRect();
+        if (!image.naturalWidth || !image.naturalHeight || !box.height) return;
+        const sourceRatio = image.naturalWidth / image.naturalHeight;
+        const boxRatio = box.width / box.height;
+        const renderedWidth = sourceRatio > boxRatio ? box.width : box.height * sourceRatio;
+
+        caption.style.width = `${renderedWidth}px`;
+        caption.style.marginLeft = `${(box.width - renderedWidth) / 2}px`;
       });
     };
 
@@ -93,7 +102,7 @@ const { works, label, empty, emptyDetail } = Astro.props;
   }
 
   @media (min-width: 601px) and (max-width: 899px) {
-    .slider { height: 42svh; }
+    .slider { height: 100%; }
   }
 
   @media (max-width: 600px) {
@@ -106,10 +115,11 @@ const { works, label, empty, emptyDetail } = Astro.props;
   }
 
   @media (min-width: 900px) {
-    .slider { height: auto; padding-bottom: 4rem; width: 100%; }
-    .viewport { height: auto; }
-    .track { aspect-ratio: 4 / 3; height: auto; margin-inline: auto; max-height: calc(86svh - 4rem); }
-    .artwork { height: 100%; width: 100%; }
-    .slide :global(img) { height: 100%; object-fit: cover; width: 100%; }
+    .slider, .viewport, .track { height: 100%; width: 100%; }
+    .track { aspect-ratio: auto; margin: 0; max-height: none; }
+    .slide { align-items: stretch; justify-content: stretch; }
+    .artwork { align-items: stretch; display: grid; grid-template-rows: minmax(0, 1fr) auto; height: 100%; width: 100%; }
+    .slide :global(img) { height: 100%; min-height: 0; object-fit: contain; object-position: center top; width: 100%; }
+    figcaption { align-self: start; margin-top: var(--slider-caption-gap); text-align: left; }
   }
 </style>
