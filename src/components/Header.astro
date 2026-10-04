@@ -78,7 +78,7 @@ const nav = [
   .menu-open .menu-lines i:first-child { transform: translateY(7px) rotate(45deg); }
   .menu-open .menu-lines i:nth-child(2) { opacity: 0; }
   .menu-open .menu-lines i:last-child { transform: translateY(-7px) rotate(-45deg); }
-  .menu-panel { background: var(--menu-canvas); display: flex; flex-direction: column; inset: 0 0 0 auto; width: var(--menu-width); overflow-y: auto; padding: calc(var(--header-height) + clamp(3rem, 8vh, 6rem)) clamp(1rem, 2vw, 2.5rem) clamp(1.5rem, 3vw, 3.5rem); position: fixed; visibility: hidden; transform: translateX(100%); z-index: 4; transition: transform var(--menu-duration) var(--menu-ease), visibility 0s linear var(--menu-duration); }
+  .menu-panel { background: linear-gradient(to right, #fff 0%, #fefdfb 12%, #fcfaf6 24%, var(--menu-canvas) 36%); display: flex; flex-direction: column; inset: 0 0 0 auto; width: var(--menu-width); overflow-y: auto; padding: calc(var(--header-height) + clamp(3rem, 8vh, 6rem)) clamp(1rem, 2vw, 2.5rem) clamp(1.5rem, 3vw, 3.5rem); position: fixed; visibility: hidden; transform: translateX(100%); z-index: 4; transition: transform var(--menu-duration) var(--menu-ease), visibility 0s linear var(--menu-duration); }
   .menu-open .menu-panel { transform: translateX(0); visibility: visible; transition-delay: 0s; }
   .menu-dismiss { position: fixed; inset: 0 var(--menu-width) 0 0; z-index: 3; visibility: hidden; pointer-events: none; }
   .menu-open .menu-dismiss { visibility: visible; pointer-events: auto; }
