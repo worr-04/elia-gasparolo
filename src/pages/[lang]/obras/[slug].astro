@@ -1,13 +1,17 @@
 ---
+interface Props {}
+import { routeContext } from "../../../routing";
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLanguage, languages } from '../../../i18n';
+import imageSizes from '../../../work-image-sizes.json';
 import { works } from '../../../works-content';
 
 export function getStaticPaths() {
   return languages.flatMap((lang) => works.map((work) => ({ params: { lang, slug: work.slug } })));
 }
 
-const { lang: langParam, slug } = Astro.params;
+const { lang: langParam, suffix } = routeContext(Astro.url.pathname);
+const slug = suffix.split('/')[1];
 const lang = isLanguage(langParam) ? langParam : 'es';
 const work = works.find((item) => item.slug === slug);
 
@@ -16,6 +20,7 @@ if (!work) {
 }
 
 const base = import.meta.env.BASE_URL;
+const dimensions: Record<string, number[]> = imageSizes;
 const paragraphs = work.body[lang]
   .split(/\n\s*\n/)
   .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
@@ -24,30 +29,83 @@ const paragraphs = work.body[lang]
 
 <BaseLayout lang={lang} title={`${work.title[lang]} — Elia Gasparolo`}>
   <article class="work-page">
-    <h1>{work.title[lang]}</h1>
+    <div class="work-stage">
+    <h1 class="section-title">{work.title[lang]}</h1>
 
-    <div class="work-slider" aria-label={work.title[lang]}>
+    <div class="gallery">
+    <div class="work-slider" id="work-gallery" tabindex="0" role="region" aria-label={work.title[lang]}>
       {work.images.map((image, index) => (
-        <figure>
-          <img src={`${base}${image}`} alt={`${work.title[lang]} — ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
+        <figure style={`aspect-ratio: ${dimensions[image][0]} / ${dimensions[image][1]}`}>
+          <img width={dimensions[image][0]} height={dimensions[image][1]} src={`${base}${image}`} alt={`${work.title[lang]} — ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
         </figure>
       ))}
     </div>
 
+    <div class="gallery-controls">
+      <button type="button" data-gallery-prev aria-controls="work-gallery" aria-label={lang === 'es' ? 'Imagen anterior' : 'Previous image'}><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M21 5 10 16l11 11" /></svg></button>
+      <button type="button" data-gallery-next aria-controls="work-gallery" aria-label={lang === 'es' ? 'Imagen siguiente' : 'Next image'}><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m11 5 11 11-11 11" /></svg></button>
+    </div>
+    </div>
+    </div>
     <div class="work-text">
       {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </article>
 </BaseLayout>
 
+<script>
+  document.querySelectorAll<HTMLElement>('.work-page .gallery').forEach(gallery => {
+    const track = gallery.querySelector<HTMLElement>('.work-slider')!;
+    const figures = Array.from(track.querySelectorAll<HTMLElement>('figure'));
+    const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]')!;
+    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]')!;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      const end = Math.max(0, track.scrollWidth - track.clientWidth);
+      previous.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= end - 1;
+    };
+    const move = (direction: number) => {
+      const end = Math.max(0, track.scrollWidth - track.clientWidth);
+      const position = track.scrollLeft;
+      const stops = [...new Set([0, ...figures.map(figure => Math.min(figure.offsetLeft, end)), end])].sort((a, b) => a - b);
+      const destination = direction > 0
+        ? stops.find(stop => stop > position + 1) ?? end
+        : stops.findLast(stop => stop < position - 1) ?? 0;
+      // Pan across wide photographs instead of jumping past unseen areas.
+      const distance = Math.min(Math.abs(destination - position), track.clientWidth);
+      track.scrollTo({ left: position + direction * distance, behavior: reduced.matches ? 'instant' : 'smooth' });
+    };
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    track.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } });
+    track.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    track.querySelectorAll('img').forEach(image => image.addEventListener('load', update));
+    update();
+  });
+</script>
 <style>
-  .work-page { margin: 0 auto; max-width: 110rem; padding: clamp(2rem, 5vw, 5rem); }
-  h1 { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.1; margin: 0 0 clamp(3rem, 8vw, 8rem); }
-  .work-slider { display: flex; gap: clamp(.75rem, 2vw, 1.5rem); margin: 0; overflow-x: auto; overscroll-behavior-x: contain; padding: 0 0 .75rem; scroll-snap-type: x mandatory; scrollbar-color: rgba(25,25,24,.35) transparent; scrollbar-width: thin; }
-  figure { flex: 0 0 auto; height: clamp(18rem, 40vw, 34rem); margin: 0; scroll-snap-align: start; width: fit-content; }
-  figure img { display: block; height: 100%; width: auto; }
-  .work-text { font-size: clamp(.8rem, .85vw, .95rem); line-height: 1.65; margin-top: clamp(3rem, 7vw, 8rem); max-width: 44rem; }
+  .work-stage { height: calc(100svh - var(--content-header-height)); display: grid; grid-template-rows: auto minmax(0, 1fr); }
+  .section-title { font-size: var(--section-title-size); padding: 1.25rem 3cqw 0; }
+  :global([data-variant="2"]) .work-text { margin-inline: 0; }
+  :global([data-variant="2"]) .work-stage { height: calc(100svh - var(--content-header-height) - var(--content-top-space)); }
+  :global([data-variant="2"]) .section-title { padding: 0; }
+  .gallery { position: relative; min-height: 0; min-width: 0; }
+  .work-slider { display: flex; height: 100%; gap: var(--work-slide-gap); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; position: relative; scrollbar-width: none; }
+  .work-slider::-webkit-scrollbar { display: none; }
+  figure { flex: 0 0 auto; height: 100%; width: auto; min-width: 0; margin: 0; scroll-snap-align: start; }
+  figure img { display: block; height: 100%; width: 100%; max-width: none; }
+  .gallery-controls { position: absolute; inset: 0; pointer-events: none; }
+  button { background: transparent; border: 0; color: white; cursor: pointer; height: 128px; width: 104px; padding: 20px; position: absolute; top: 50%; transform: translateY(-50%); pointer-events: auto; filter: drop-shadow(0 1px 2px #000a); }
+  :global([data-variant="1"]) button { height: 160px; width: 144px; padding: 16px 8px; }
+  [data-gallery-prev] { left: 1cqw; }
+  [data-gallery-next] { right: 1cqw; }
+  button svg { display: block; width: 100%; fill: none; stroke: currentColor; stroke-width: 1; }
+  button:disabled { visibility: hidden; }
+  button:hover svg { opacity: .65; }
+  .work-text { font-size: .9rem; line-height: 1.75; margin: 3rem 3cqw 5rem; max-width: 44rem; }
   .work-text p { margin: 0; }
   .work-text p + p { margin-top: 1.15rem; }
-  @media (max-width: 600px) { .work-page { padding: 2.5rem 4vw 4rem; } .work-slider { margin-left: -4vw; margin-right: -4vw; padding-left: 4vw; padding-right: 4vw; } figure { height: clamp(18rem, 80vw, 28rem); } }
+  @media(max-width: 600px) { .section-title { padding: 1rem 4vw 0; } .work-text { margin-inline: 4vw; } }
 </style>

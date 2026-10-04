@@ -1,4 +1,6 @@
 ---
+interface Props {}
+import { routeContext } from "../../../routing";
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLanguage, languages } from '../../../i18n';
 import { textContent, textItems } from '../../../text-content';
@@ -12,7 +14,7 @@ export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
 }
 
-const { lang: langParam } = Astro.params;
+const { lang: langParam } = routeContext(Astro.url.pathname);
 const lang = isLanguage(langParam) ? langParam : 'es';
 const copy = textContent[lang];
 const base = import.meta.env.BASE_URL;
@@ -21,7 +23,7 @@ const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas,
 
 <BaseLayout lang={lang} title={`${copy.title} — Elia Gasparolo`}>
   <article class="texts-page">
-    <h1>{copy.title}</h1>
+    <h1 class="section-title">{copy.title}</h1>
 
     <div class="texts-list">
       {textItems.map((item) => {
@@ -44,18 +46,17 @@ const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas,
 </BaseLayout>
 
 <style>
-  .texts-page { margin: 0 auto; max-width: 110rem; padding: clamp(2rem, 5vw, 5rem); }
-  h1 { font-size: clamp(1.45rem, 2.1vw, 2.2rem); font-weight: 500; letter-spacing: -.035em; margin: 0 0 clamp(3rem, 8vw, 8rem); }
+  .texts-page { margin: 0 auto; max-width: 110rem; padding: var(--section-page-top) clamp(2rem, 5vw, 5rem) clamp(2rem, 5vw, 5rem); }
   .texts-list { border-top: 1px solid rgba(25, 25, 24, .14); }
   .text-item { align-items: start; border-bottom: 1px solid rgba(25, 25, 24, .14); display: grid; gap: 1.25rem clamp(1.25rem, 3vw, 3.5rem); grid-template-columns: minmax(11rem, 25%) 1fr; padding: clamp(1.25rem, 2.5vw, 2.75rem) 0; }
   .credit { font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; }
   .text-item img { display: block; height: auto; width: 100%; }
   .text-details { align-self: stretch; display: flex; flex-direction: column; }
   .credit { margin: 0 0 .8rem; }
-  h2 { font-size: clamp(1rem, 1.35vw, 1.35rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; margin: 0; }
+  h2 { font-size: var(--subheading-size); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; margin: 0; }
   .links { margin-top: auto; padding-top: 2rem; }
   .links a { border-bottom: 1px solid currentColor; color: inherit; font-size: .85rem; padding-bottom: .14rem; text-decoration: none; }
   .links a:hover { opacity: .55; }
-  @media (max-width: 899px) { .texts-page { padding: 2.5rem 4vw 4rem; } h1 { margin-bottom: 3.5rem; } }
+  @media (max-width: 899px) { .texts-page { padding: 2.5rem 4vw 4rem; } }
   @media (max-width: 600px) { .text-item { grid-template-columns: 1fr; } }
 </style>

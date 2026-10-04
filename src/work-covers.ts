@@ -1,0 +1,28 @@
+// Landscape photographs where available; display uncropped in the works grid.
+export const workCovers: Record<string, string> = {
+  "reliquias": "works/reliquias/01.webp",
+  "la-propension": "works/la-propension/04.webp",
+  "la-complicidad-de-los-dupiones": "works/la-complicidad-de-los-dupiones/09.webp",
+  "trazas": "works/trazas/01.webp",
+  "fases-y-despliegue": "works/fases-y-despliegue/05.webp",
+  "derivas": "works/derivas/01.webp",
+  "transitos": "works/transitos/01.webp",
+  "ofrendas": "works/ofrendas/01.webp",
+  "tejido-conectivo": "works/tejido-conectivo/03.webp",
+  "instalacion-tejido-conectivo": "works/instalacion-tejido-conectivo/02.webp",
+  "luz-ambar": "works/luz-ambar/01.webp",
+  "tejido-conectivo-ii": "works/tejido-conectivo-ii/01.webp",
+  "algol-eclipse": "works/algol-eclipse/01.webp",
+  "avyakta": "works/avyakta/01.webp",
+  "gravitacion": "works/gravitacion/06.webp",
+  "sirio-el-ojo-en-el-cielo": "works/sirio-el-ojo-en-el-cielo/01.webp",
+  "messier-m22-m30": "works/messier-m22-m30/01.webp",
+  "cartografias-posibles": "works/cartografias-posibles/01.webp",
+  "el-futuro-es-prehistoria": "works/el-futuro-es-prehistoria/01.webp",
+  "intocable": "works/intocable/03.webp",
+  "destellos-de-naturaleza": "works/destellos-de-naturaleza/01.webp",
+  "paisajes-posibles": "works/paisajes-posibles/01.webp",
+  "entonces-la-proteccion": "works/entonces-la-proteccion/01.webp",
+  "los-amantes": "works/los-amantes/04.webp",
+  "the-right-to-memory": "works/the-right-to-memory/01.webp"
+};

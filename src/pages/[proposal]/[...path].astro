@@ -1,0 +1,22 @@
+---
+import Home from '../[lang]/index.astro';
+import Bio from '../[lang]/bio/index.astro';
+import Works from '../[lang]/obras/index.astro';
+import Work from '../[lang]/obras/[slug].astro';
+import Collaborations from '../[lang]/colaboraciones/index.astro';
+import Text from '../[lang]/texto/index.astro';
+import Press from '../[lang]/prensa/index.astro';
+import { works } from '../../works-content';
+import { routeContext } from '../../routing';
+
+export function getStaticPaths() {
+  const pages = ['', 'bio', 'obras', 'colaboraciones', 'texto', 'prensa', ...works.map(work => `obras/${work.slug}`)];
+  return ['Caminografico1', 'Caminografico2'].flatMap(proposal =>
+    ['', 'en'].flatMap(lang => pages.map(page => ({ params: { proposal, path: [lang, page].filter(Boolean).join('/') || undefined } })))
+  );
+}
+const { suffix } = routeContext(Astro.url.pathname);
+const sections = { bio: Bio, obras: Works, colaboraciones: Collaborations, texto: Text, prensa: Press };
+const Page = suffix.startsWith('obras/') ? Work : sections[suffix as keyof typeof sections] ?? Home;
+---
+<Page />
