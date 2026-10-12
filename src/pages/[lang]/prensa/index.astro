@@ -1,5 +1,6 @@
 ---
 interface Props {}
+import { Image } from 'astro:assets';
 import { routeContext } from "../../../routing";
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLanguage, languages } from '../../../i18n';
@@ -43,9 +44,9 @@ const images = { '01': image01, '02': image02, '03': image03, '04': image04, '05
         return (
           <article class="card">
             <div class:list={{ 'card-images': true, multiple: Boolean(supplementaryImages?.length) }}>
-              <img src={image.src} width={image.width} height={image.height} alt={`Captura de ${item.publication}`} loading="lazy" />
+              <Image src={image} widths={[480, 800, 1200]} sizes="(max-width: 600px) 92vw, 25vw" alt={`${lang === 'es' ? 'Captura de' : 'Article from'} ${item.publication}`} loading="lazy" />
               {supplementaryImages?.map((supplementary, supplementaryIndex) => (
-                <img src={supplementary.src} width={supplementary.width} height={supplementary.height} alt={`Página ${supplementaryIndex + 2} de la nota de ${item.publication}`} loading="lazy" />
+                <Image src={supplementary} widths={[480, 800, 1200]} sizes="(max-width: 600px) 92vw, 25vw" alt={`${item.publication} — ${lang === 'es' ? 'página' : 'page'} ${supplementaryIndex + 2}`} loading="lazy" />
               ))}
             </div>
             <div class="card-content">
@@ -67,7 +68,7 @@ const images = { '01': image01, '02': image02, '03': image03, '04': image04, '05
   .publication { font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; }
   .card-images { margin: 0; }
   .card-images.multiple { display: grid; gap: .35rem; grid-template-columns: 1fr; }
-  .card-images img { display: block; height: auto; width: 100%; }
+  .card-images :global(img) { display: block; height: auto; width: 100%; }
   .card-content { align-self: stretch; display: flex; flex-direction: column; }
   .publication { margin: 0 0 .8rem; }
   h2 { font-size: var(--subheading-size); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; margin: 0; }

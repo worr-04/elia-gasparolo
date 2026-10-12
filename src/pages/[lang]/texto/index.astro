@@ -1,5 +1,6 @@
 ---
 interface Props {}
+import { Image } from 'astro:assets';
 import { routeContext } from "../../../routing";
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLanguage, languages } from '../../../i18n';
@@ -30,7 +31,7 @@ const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas,
         const image = images[item.image as keyof typeof images];
         return (
           <article class="text-item">
-            <img src={image.src} width={image.width} height={image.height} alt={`Obra vinculada a ${item.title[lang]}`} loading="lazy" />
+            <Image src={image} widths={[480, 800, 1200]} sizes="(max-width: 600px) 92vw, 25vw" alt={`${lang === 'es' ? 'Obra vinculada a' : 'Artwork accompanying'} ${item.title[lang]}`} loading="lazy" />
             <div class="text-details">
               <p class="credit">{item.author} · {item.year}</p>
               <h2>{item.title[lang]}</h2>
@@ -50,7 +51,7 @@ const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas,
   .texts-list { border-top: 1px solid rgba(25, 25, 24, .14); }
   .text-item { align-items: start; border-bottom: 1px solid rgba(25, 25, 24, .14); display: grid; gap: 1.25rem clamp(1.25rem, 3vw, 3.5rem); grid-template-columns: minmax(11rem, 25%) 1fr; padding: clamp(1.25rem, 2.5vw, 2.75rem) 0; }
   .credit { font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; }
-  .text-item img { display: block; height: auto; width: 100%; }
+  .text-item :global(img) { display: block; height: auto; width: 100%; }
   .text-details { align-self: stretch; display: flex; flex-direction: column; }
   .credit { margin: 0 0 .8rem; }
   h2 { font-size: var(--subheading-size); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; margin: 0; }

@@ -1,4 +1,4 @@
-// Landscape photographs where available; display uncropped in the works grid.
+// Landscape photographs where available; fill horizontal frames in the works grid.
 export const workCovers: Record<string, string> = {
   "reliquias": "works/reliquias/01.webp",
   "la-propension": "works/la-propension/04.webp",

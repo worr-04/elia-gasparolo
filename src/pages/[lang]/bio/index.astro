@@ -23,6 +23,7 @@ const cvHref = `${base}cv/elia-gasparolo-cv-${lang}.pdf`;
     <div class="introduction">
       <figure>
         <Image src={portrait} alt={t.imageAlt} widths={[640, 960, 1280, 1600]} sizes="(max-width: 899px) 92vw, 31vw" loading="eager" />
+        <figcaption>{lang === 'es' ? 'Foto' : 'Photo'}: Nora Lezano</figcaption>
       </figure>
 
       <div class="content">
@@ -45,6 +46,7 @@ const cvHref = `${base}cv/elia-gasparolo-cv-${lang}.pdf`;
   .bio-statement { margin: 0 auto; max-width: 100rem; padding: var(--section-page-top) clamp(2rem, 5vw, 5rem) clamp(2rem, 5vw, 5rem); }
   .introduction { display: grid; gap: clamp(2.5rem, 6vw, 7rem); grid-template-columns: minmax(12rem, .75fr) minmax(0, 1.25fr); }
   figure { margin: 0; }
+  figcaption { margin-top: .5rem; font-size: .7rem; line-height: 1.4; color: #666; }
   figure :global(img) { display: block; height: auto; width: 100%; }
   .content { max-width: 44rem; }
   section + section { margin-top: clamp(3.5rem, 8vw, 8rem); }

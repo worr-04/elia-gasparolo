@@ -4,8 +4,7 @@ import { works } from '../works-content';
 
 export const prerender = true;
 
-const site = 'https://worr-04.github.io';
-const base = '/elia-gasparolo/';
+const base = import.meta.env.BASE_URL;
 const sections = ['', 'bio/', 'obras/', 'colaboraciones/', 'texto/', 'prensa/'];
 
 const escapeXml = (value: string) => value.replace(/[<>&'\"]/g, (character) => ({
@@ -16,7 +15,8 @@ const escapeXml = (value: string) => value.replace(/[<>&'\"]/g, (character) => (
   '"': '&quot;',
 })[character] ?? character);
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({ site }) => {
+  if (!site) throw new Error('Configure site in astro.config.mjs');
   const urls = [
     ...languages.flatMap((lang) => sections.map((section) => `${base}${lang}/${section}`)),
     ...languages.flatMap((lang) => works.map((work) => `${base}${lang}/obras/${work.slug}/`)),

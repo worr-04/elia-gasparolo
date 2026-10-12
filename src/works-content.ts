@@ -125,8 +125,8 @@ export const works: Work[] = [
       "en": "Drifts from the Transits Series"
     },
     "body": {
-      "es": "Derivas de la serie Tránsitos\n\nLejos de la perfección técnica, esta obra celebra el error de devanado como una fuerza constructiva. Una trama suspendida que nace del cruce libre y la pura superposición de la seda en su deriva.\n\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2021\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2021\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2021",
-      "en": "Drifts from the Transits Series\nFar from technical perfection, this work celebrates the winding error as a constructive force: a suspended grid born from the free crossing and pure overlay of silk in its drift.\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2021\n\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2021\n\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2021"
+      "es": "Derivas de la serie Tránsitos\n\nLejos de la perfección técnica, esta obra celebra el error de devanado como una fuerza constructiva. Una trama suspendida que nace del cruce libre y la pura superposición de la seda en su deriva.\n\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2026\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2026\n\nTítulo: Derivas\nTécnica: Error de devanado de seda\nMedidas: 71 x 29 cm\nAño: 2026",
+      "en": "Drifts from the Transits Series\nFar from technical perfection, this work celebrates the winding error as a constructive force: a suspended grid born from the free crossing and pure overlay of silk in its drift.\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2026\n\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2026\n\nTitle: Drifts \nMedium: Silk winding remnants Dimensions: 71 x 29 cm Year: 2026"
     },
     "images": [
       "works/derivas/01.webp",

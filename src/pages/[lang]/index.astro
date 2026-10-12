@@ -4,11 +4,12 @@ import { routeContext } from "../../routing";
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import WorkSlider from '../../components/WorkSlider.astro';
 import { copy, languages, type Language } from '../../i18n';
-import tejidoConectivo from '../../assets/home-optimized/01-tejido-conectivo.webp';
-import collarDeMandarinas from '../../assets/home-optimized/02-collar-de-mandarinas.webp';
-import laPropension from '../../assets/home-optimized/03-la-propension.webp';
-import reliquias from '../../assets/home-optimized/04-reliquias.webp';
-import intocable from '../../assets/home-optimized/05-intocable.webp';
+import tejidoConectivo from '../../assets/home-final/01-home.webp';
+import laPropension from '../../assets/home-final/02-home.webp';
+import intocable from '../../assets/home-final/03-home.webp';
+import reliquias from '../../assets/home-final/04-home.webp';
+import accion from '../../assets/home-final/05-home.webp';
+import reliquiasMarco from '../../assets/home-final/06-home.webp';
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -17,8 +18,14 @@ export function getStaticPaths() {
 const lang = routeContext(Astro.url.pathname).lang as Language;
 const t = copy[lang];
 
-const images = [tejidoConectivo, collarDeMandarinas, laPropension, reliquias, intocable];
-const works = t.home.works.map((work, index) => ({ ...work, image: images[index] }));
+const works = [
+  { image: tejidoConectivo, title: 'Instalación Tejido Conectivo' },
+  { image: laPropension, title: 'La Propensión III' },
+  { image: intocable, title: 'Intocable' },
+  { image: reliquias, title: 'Reliquias' },
+  { image: accion, title: lang === 'es' ? 'Acción con fuego entre rocas' : 'Action with fire among rocks' },
+  { image: reliquiasMarco, title: 'Reliquias' },
+];
 ---
 
 <BaseLayout lang={lang} fullViewport>

@@ -2,49 +2,135 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 interface Props {
-  works: { image: ImageMetadata; title: string; year?: string; details: string[] }[];
+  works: { image: ImageMetadata; title: string }[];
   label: string; empty: string; emptyDetail: string;
 }
 const { works, label, empty, emptyDetail } = Astro.props;
 const es = Astro.url.pathname.indexOf('/en/') === -1;
 ---
-<section class="slider" aria-label={label} aria-roledescription={es ? 'Carrusel' : 'Carousel'}>
+<section class="slider" tabindex="0" aria-label={label} aria-describedby="carousel-instructions" aria-roledescription={es ? 'Carrusel' : 'Carousel'}>
+  <span id="carousel-instructions" class="sr-only">{es ? 'Arrastrá para recorrer las imágenes. Con el teclado, usá las flechas; espacio pausa o reanuda.' : 'Drag to browse images. Use arrow keys to navigate; space pauses or resumes.'}</span>
   {works.length ? <>
-    {works.map(({ image, title }, index) => (
-      <figure class:list={{ slide: true, current: index === 0 }} aria-hidden={index !== 0}>
-        <Image src={image} alt={title} widths={[640, 1280, 1920, 2560]} sizes="100vw" loading={index === 0 ? 'eager' : 'lazy'} />
-      </figure>
-    ))}
-    <button class="pause-control" data-pause aria-label={es ? 'Pausar presentación' : 'Pause slideshow'} data-play-label={es ? 'Reproducir presentación' : 'Play slideshow'} data-pause-label={es ? 'Pausar presentación' : 'Pause slideshow'}>Ⅱ</button>
+    <div class="carousel-track">
+      <div class="carousel-sequence">
+        {works.map(({ image, title }) => (
+          <figure data-ratio={image.width / image.height} style={`aspect-ratio: ${image.width} / ${image.height}`}>
+            <Image src={image} alt={title} widths={[640, 1280, 1920, 2560]} sizes={`${image.width / image.height * 100}svh`} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </div>
   </> : <p>{empty} <span>{emptyDetail}</span></p>}
 </section>
 <script>
   document.querySelectorAll<HTMLElement>('.slider').forEach(slider => {
-    const slides = slider.querySelectorAll<HTMLElement>('.slide');
-    if (slides.length < 2) return;
-    let current = 0;
-    const pause = slider.querySelector<HTMLButtonElement>('[data-pause]')!;
+    const track = slider.querySelector<HTMLElement>('.carousel-track');
+    const sequence = slider.querySelector<HTMLElement>('.carousel-sequence');
+    if (!track || !sequence) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     let playing = !reduced.matches;
-    const sync = () => { pause.textContent = playing ? 'Ⅱ' : '▷'; pause.setAttribute('aria-label', (playing ? pause.dataset.pauseLabel : pause.dataset.playLabel)!); };
-    const show = (next: number) => {
-      current = (next + slides.length) % slides.length;
-      slides.forEach((slide, index) => { slide.classList.toggle('current', index === current); slide.setAttribute('aria-hidden', String(index !== current)); });
+    let offset = 0;
+    let width = 0;
+    let previousTime = 0;
+    const speed = 22; // Constant CSS pixels per second, independent of screen size.
+    let pointer: number | null = null;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocity = 0;
+    const advance = (distance: number) => {
+      if (width) offset = ((offset + distance) % width + width) % width;
     };
-    const move = (offset: number) => { playing = false; sync(); show(current + offset); };
-    pause.addEventListener('click', () => { playing = !playing; sync(); });
-    reduced.addEventListener('change', () => { if (reduced.matches) { playing = false; sync(); } });
-    slider.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } });
-    window.setInterval(() => { if (playing && !document.hidden && !document.body.classList.contains('menu-is-open') && !slider.matches(':focus-within')) show(current + 1); }, 6500);
-    sync();
+    const render = () => { track.style.transform = `translate3d(${-offset}px, 0, 0)`; };
+    const measure = () => {
+      const height = slider.clientHeight;
+      const gap = parseFloat(getComputedStyle(sequence).columnGap) || 0;
+      const figures = Array.from(sequence.querySelectorAll<HTMLElement>('figure'));
+      if (!height || !figures.length) return;
+      // Explicit sizing avoids max-content reserving the images' intrinsic widths,
+      // which can leave unused space after the last figure in a sequence.
+      const widths = figures.map(figure => height * Number(figure.dataset.ratio));
+      const nextWidth = widths.reduce((sum, value) => sum + value, 0) + gap * figures.length;
+      for (const group of Array.from(track.children) as HTMLElement[]) {
+        group.style.width = `${nextWidth}px`;
+        group.querySelectorAll<HTMLElement>('figure').forEach((figure, index) => {
+          figure.style.width = `${widths[index]}px`;
+        });
+      }
+      offset = width ? offset / width * nextWidth : 0;
+      width = nextWidth;
+      // Cover even very wide screens; each copy starts exactly one sequence apart.
+      const copies = Math.ceil(slider.clientWidth / width);
+      while (track.children.length > copies + 1) track.lastElementChild?.remove();
+      while (track.children.length < copies + 1) {
+        const clone = sequence.cloneNode(true) as HTMLElement;
+        clone.setAttribute('aria-hidden', 'true');
+        clone.inert = true;
+        track.append(clone);
+      }
+      render();
+    };
+    reduced.addEventListener('change', () => { playing = !reduced.matches; velocity = 0; });
+    slider.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0 || pointer !== null) return;
+      pointer = event.pointerId;
+      lastX = event.clientX;
+      lastTime = event.timeStamp;
+      velocity = 0;
+      slider.setPointerCapture(pointer);
+      slider.classList.add('is-dragging');
+    });
+    slider.addEventListener('pointermove', event => {
+      if (event.pointerId !== pointer) return;
+      const distance = lastX - event.clientX;
+      const elapsed = Math.max(event.timeStamp - lastTime, 1);
+      velocity = Math.max(-1800, Math.min(1800, distance / elapsed * 1000));
+      advance(distance);
+      lastX = event.clientX;
+      lastTime = event.timeStamp;
+      render();
+    });
+    const release = (event: PointerEvent) => {
+      if (event.pointerId !== pointer) return;
+      if (event.type !== 'pointerup' || event.timeStamp - lastTime > 100 || reduced.matches) velocity = 0;
+      pointer = null;
+      slider.classList.remove('is-dragging');
+      if (slider.hasPointerCapture(event.pointerId)) slider.releasePointerCapture(event.pointerId);
+    };
+    slider.addEventListener('pointerup', release);
+    slider.addEventListener('pointercancel', release);
+    slider.addEventListener('lostpointercapture', release);
+    slider.addEventListener('keydown', event => {
+      if (event.key === ' ') { event.preventDefault(); playing = !playing; velocity = 0; return; }
+      if (!width || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      velocity = 0;
+      advance((event.key === 'ArrowRight' ? 1 : -1) * slider.clientWidth * .5);
+      render();
+    });
+    const observer = new ResizeObserver(measure);
+    observer.observe(slider);
+    const frame = (time: number) => {
+      const elapsed = previousTime ? Math.min(time - previousTime, 64) / 1000 : 0;
+      previousTime = time;
+      if (pointer === null && width && !document.hidden && !document.body.classList.contains('menu-is-open')) {
+        // Release momentum eases back into the slow automatic movement.
+        advance(((playing ? speed : 0) + velocity) * elapsed);
+        velocity *= Math.exp(-3 * elapsed);
+        if (Math.abs(velocity) < .1) velocity = 0;
+        render();
+      }
+      requestAnimationFrame(frame);
+    };
+    measure(); requestAnimationFrame(frame);
   });
 </script>
 <style>
-  .slider { height: 100%; position: relative; width: 100%; background: #292922; }
-  .slide { inset: 0; margin: 0; opacity: 0; position: absolute; transition: opacity 1200ms ease; pointer-events: none; }
-  .slide.current { opacity: 1; }
-  .slide :global(img) { display: block; height: 100%; object-fit: cover; width: 100%; }
-  .pause-control { position: absolute; bottom: 1.5rem; right: 3vw; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); border: 0; }
-  .pause-control:focus-visible { width: 44px; height: 44px; clip-path: none; background: #0008; color: white; }
-  @media(prefers-reduced-motion: reduce) { .slide { transition: none; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .slider { height: 100%; max-height: 100%; overflow: hidden; position: relative; width: 100%; background: #fff; cursor: grab; touch-action: pan-y; user-select: none; --carousel-gap: clamp(4px, .4vw, 8px); }
+  .slider.is-dragging { cursor: grabbing; }
+  .slider:focus-visible { outline: 2px solid #888; outline-offset: -2px; }
+  .carousel-track { pointer-events: none; display: flex; height: 100%; width: max-content; will-change: transform; }
+  .carousel-sequence { gap: var(--carousel-gap); padding-right: var(--carousel-gap); display: flex; flex: none; height: 100%; width: max-content; }
+  figure { flex: none; height: 100%; width: auto; margin: 0; }
+  figure :global(img) { display: block; height: 100%; width: 100%; max-width: none; object-fit: contain; }
 </style>

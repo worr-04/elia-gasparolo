@@ -20,19 +20,19 @@ const nav = [
 
 <header class="legacy-header">
   <a class="identity" href={route.href()} aria-label="Elia Gasparolo — Home">ELIA GASPAROLO</a>
-  <button class="menu-toggle" type="button" aria-controls="mobile-navigation" aria-expanded="false" data-menu-toggle>
+  <button class="menu-toggle" type="button" aria-controls="mobile-navigation" aria-expanded="false" data-menu-toggle data-open-label={lang === 'es' ? 'Abrir menú' : 'Open menu'} data-close-label={lang === 'es' ? 'Cerrar menú' : 'Close menu'}>
     <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="sr-only">Abrir menú</span>
+    <span class="sr-only">{lang === 'es' ? 'Abrir menú' : 'Open menu'}</span>
   </button>
-  <nav id="mobile-navigation" aria-label="Navegación principal">
+  <nav id="mobile-navigation" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
     <ul>
       {nav.map(([slug, label]) => <li><a href={route.href(slug)} aria-current={isCurrentPage(slug) ? 'page' : undefined}>{label}</a></li>)}
     </ul>
-    <div class="language mobile-language" aria-label="Cambiar idioma">
+    <div class="language mobile-language" aria-label={lang === 'es' ? 'Cambiar idioma' : 'Change language'}>
       <a class:list={{ active: lang === 'es' }} href={languageHref('es')}>ES</a><span aria-hidden="true"> / </span><a class:list={{ active: lang === 'en' }} href={languageHref('en')}>EN</a>
     </div>
   </nav>
-  <div class="language" aria-label="Cambiar idioma">
+  <div class="language" aria-label={lang === 'es' ? 'Cambiar idioma' : 'Change language'}>
     <a class:list={{ active: lang === 'es' }} href={languageHref('es')}>ES</a><span aria-hidden="true"> / </span><a class:list={{ active: lang === 'en' }} href={languageHref('en')}>EN</a>
   </div>
 </header>
@@ -41,10 +41,13 @@ const nav = [
   document.querySelectorAll<HTMLElement>('.legacy-header').forEach((header) => {
     const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]');
     const label = toggle?.querySelector<HTMLElement>('.sr-only');
+    header.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && header.classList.contains('menu-open')) { toggle?.click(); toggle?.focus(); }
+    });
     toggle?.addEventListener('click', () => {
       const isOpen = header.classList.toggle('menu-open');
       toggle.setAttribute('aria-expanded', String(isOpen));
-      if (label) label.textContent = isOpen ? 'Cerrar menú' : 'Abrir menú';
+      if (label) label.textContent = (isOpen ? toggle.dataset.closeLabel : toggle.dataset.openLabel) ?? '';
     });
   });
 </script>
