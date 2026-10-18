@@ -160,27 +160,6 @@ export const works: Work[] = [
   },
   {
     "id": "08",
-    "slug": "ofrendas",
-    "title": {
-      "es": "Ofrendas",
-      "en": "Offerings"
-    },
-    "body": {
-      "es": "Ofrendas\n\nEl deseo de vestir aromas, texturas, sabores. Recuerdos convertidos en una nueva piel que busca ser tocada y resignifica el pasado. \nA partir de restos orgánicos, se generan 3 collares biotextiles que resignifican el pasado y se integran a nuevos procesos de vida como una segunda piel. A través de rituales de retorno al agua, a la tierra y al fuego estas piezas transmutan en ofrendas que conectan materia, tiempo y origen. Un tejido simbólico que une\nlo visible y lo ancestral, donde la forma se transforma y el tiempo se inscribe.\n\nComo toda piel, esta se renueva iniciando un nuevo ciclo, el desprendimiento. Luego de ser testigo de sus procesos vitales, estas obras biotextiles retornan a través de rituales como ofrendas de agradecimiento a su tierra de origen, a disolverse en el agua y a convertirse en cenizas para regar el suelo nuevamente.\nTomo la cartografía celeste del día, hora y lugar exacto de las ofrendas. Las bordo con hilos hilados a mano y teñidos con pigmentos orgánicos fusionando el registro astronómico y espiritual del ritual. \n\nEl registro audiovisual de la acción ritual de ofrenda y su posterior bordado refuerzan la conexión entre el cuerpo, el territorio y los ciclos de la naturaleza a través de los cuales exploro la transformación y la memoria.\n\nTejido que recuerda la importancia de la transmutación, el devenir y la conexión con el deseo. Confiar en que el pasado sembrado puede despertar en una nueva vida y en nuevas vidas.\n\n\nhttps://www.youtube.com/watch?v=Vpzks3-Uldw\n\nSerie Ofrendas\n\nConfiar en que el pasado sembrado puede despertar en una nueva vida y en nuevas vidas.\n\n(Foto Malbec)\n\nOfrendas, acción ritual de entrega a la tierra de collar biotextil de Malbec en viñedo en Mendoza. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales.\n\nCollar de Vino Malbec\nBio textil en base a fécula de maíz\nIngredientes: Resto de vino Malbec, clavo de olor, fécula de maíz, agua, vinagre y glicerina vegetal\nMedidas: 37 x 30 cm\n\n \n(Bordado Malbec)\nTítulo: 33,04401° S, 68,72389° W 06-01-2022 19:40:04\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con vino, porotos negros, cochinilla y nogal\nMedidas: 40 x 50 cm\nAño: 2024  \n\n \n Ahora se disuelven y vuelven al origen, un pago por adelantado con la confianza en un nuevo porvenir.\n \n(Foto Lavanda)\n\nOfrendas, acción ritual de entrega al mar de collar biotextil de lavandas en la costa Atlántica. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales\n\nCollar de Lavandas\nBio textil en base a fécula de maíz\nIngredientes: lavanda, té de tilo, té de manzanilla, fécula de maíz, agua, vinagre y glicerina vegetal\nMedidas: 22 x 22 cm\n\n(Bordado Lavanda)\n\nTítulo: 37,15746° S, 56,88328° W. 26-12-2021. 12:11:13\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con porotos negros, cochinilla, nogal, vino, rosa china\nMedidas: 40 x 50 cm\nAño: 2024 \n \n\nRegar el suelo con las cenizas de las cáscaras entregadas al fuego, ésa es la ofrenda.\n\n(Foto Mandarina)\n\nOfrendas, acción ritual de entrega al fuego de collar biotextil de mandarinas en la montaña de Mendoza. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales.\n\nCollar de Mandarinas\nBiotextil en base a gelatina\nIngredientes: cáscaras de mandarina, gelatina, agua, glicerina vegetal\nMedidas: 50 x 30 cm\n \n\n(Bordado Mandarina)\n\nTítulo: 33,04077° S, 69,10339° W 05-01-2022. 18:54:59\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con cúrcuma, cochinilla y nogal\nMedidas: 40 x 50 cm\nAño: 2024",
-      "en": "Offerings \nThe desire to wear aromas, textures, flavors. Memories transformed into a new skin that yearns to be touched and resignifies the past.\nCreated from organic waste, three biotextile necklaces resignify the past and integrate into new life processes as a second skin. Through rituals of return to water, earth, and fire, these pieces transmute into offerings that connect matter, time, and origin. A symbolic weaving that unites the visible with the ancestral, where form transforms and time is inscribed.\nLike any skin, this one renews itself, initiating a new cycle: the shedding. After witnessing their vital processes, these biotextile works return through rituals as offerings of gratitude to their land of origin—dissolving in water and turning into ashes to nourish the soil once again.\nI capture the celestial chart for the exact day, hour, and location of the offerings. I embroider them with hand-spun threads dyed with organic pigments, fusing the astronomical and spiritual record of the ritual.\nThe audiovisual recording of the ritual action of offering and its subsequent embroidery reinforce the connection between the body, the territory, and the cycles of nature, through which I explore transformation and memory.\nA weaving that recalls the importance of transmutation, becoming, and connecting with desire. Trusting that the sown past can awaken into a new life—and into new lives.\nVideo: https://www.youtube.com/watch?v=Vpzks3-Uldw \n\nSeries: Offerings \nTrusting that the sown past can awaken into a new life and into new lives.\n(Malbec Photo)\nOfferings, ritual action of returning a Malbec biotextile necklace to the earth in a vineyard in Mendoza, Argentina. 2022\nAction record, single-channel video, and digital photograph series\n\nMalbec Wine Necklace\nCornstarch-based biotextile.\nIngredients: Malbec wine residue, cloves, cornstarch, water, vinegar, and vegetable glycerin\nDimensions: 37 x 30 cm\n\n(Malbec Embroidery)\nTitle: 33.04401° S, 68.72389° W 06-01-2022 19:40:04\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with wine, black beans, cochineal, and walnut\nDimensions: 40 x 50 cm\nYear: 2024\n\nNow they dissolve and return to the origin, an advance payment made with trust in a new future.\n(Lavender Photo)\nOfferings, ritual action of returning a lavender biotextile necklace to the sea on the Atlantic coast. 2022\nAction record, single-channel video, and digital photograph series\n\nLavender Necklace\nCornstarch-based biotextile\nIngredients: Lavender, linden tea, chamomile tea, cornstarch, water, vinegar, and vegetable glycerin\nDimensions: 22 x 22 cm\n(Lavender Embroidery)\nTitle: 37.15746° S, 56.88328° W. 26-12-2021. 12:11:13\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with black beans, cochineal, walnut, wine, and hibiscus\nDimensions: 40 x 50 cm\nYear: 2024\n\nTo water the soil with the ashes of the peels given to the fire: that is the offering.\n(Tangerine Photo)\nOfferings, ritual action of returning a tangerine biotextile necklace to the fire in the mountains of Mendoza. 2022\nAction record, single-channel video, and digital photograph series\n\nTangerine Necklace\nGelatin-based biotextile\nIngredients: Tangerine peels, gelatin, water, vegetable glycerin\nDimensions: 50 x 30 cm\n(Tangerine Embroidery)\nTitle: 33.04077° S, 69.10339° W 05-01-2022. 18:54:59\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with turmeric, cochineal, and walnut\nDimensions: 40 x 50 cm\nYear: 2024\n\nVani & Will ver donde poner este video de performance sonora con el Ensamble de Serruchos\n\nhttps://www.youtube.com/watch?v=VmqnA92l37I"
-    },
-    "images": [
-      "works/ofrendas/01.webp",
-      "works/ofrendas/02.webp",
-      "works/ofrendas/03.webp",
-      "works/ofrendas/04.webp",
-      "works/ofrendas/05.webp",
-      "works/ofrendas/06.webp",
-      "works/ofrendas/07.webp"
-    ]
-  },
-  {
-    "id": "09",
     "slug": "tejido-conectivo",
     "title": {
       "es": "Tejido Conectivo",
@@ -210,6 +189,27 @@ export const works: Work[] = [
     ]
   },
   {
+    "id": "09",
+    "slug": "ofrendas",
+    "title": {
+      "es": "Ofrendas",
+      "en": "Offerings"
+    },
+    "body": {
+      "es": "Ofrendas\n\nEl deseo de vestir aromas, texturas, sabores. Recuerdos convertidos en una nueva piel que busca ser tocada y resignifica el pasado. \nA partir de restos orgánicos, se generan 3 collares biotextiles que resignifican el pasado y se integran a nuevos procesos de vida como una segunda piel. A través de rituales de retorno al agua, a la tierra y al fuego estas piezas transmutan en ofrendas que conectan materia, tiempo y origen. Un tejido simbólico que une\nlo visible y lo ancestral, donde la forma se transforma y el tiempo se inscribe.\n\nComo toda piel, esta se renueva iniciando un nuevo ciclo, el desprendimiento. Luego de ser testigo de sus procesos vitales, estas obras biotextiles retornan a través de rituales como ofrendas de agradecimiento a su tierra de origen, a disolverse en el agua y a convertirse en cenizas para regar el suelo nuevamente.\nTomo la cartografía celeste del día, hora y lugar exacto de las ofrendas. Las bordo con hilos hilados a mano y teñidos con pigmentos orgánicos fusionando el registro astronómico y espiritual del ritual. \n\nEl registro audiovisual de la acción ritual de ofrenda y su posterior bordado refuerzan la conexión entre el cuerpo, el territorio y los ciclos de la naturaleza a través de los cuales exploro la transformación y la memoria.\n\nTejido que recuerda la importancia de la transmutación, el devenir y la conexión con el deseo. Confiar en que el pasado sembrado puede despertar en una nueva vida y en nuevas vidas.\n\n\nhttps://www.youtube.com/watch?v=Vpzks3-Uldw\n\nSerie Ofrendas\n\nConfiar en que el pasado sembrado puede despertar en una nueva vida y en nuevas vidas.\n\n(Foto Malbec)\n\nOfrendas, acción ritual de entrega a la tierra de collar biotextil de Malbec en viñedo en Mendoza. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales.\n\nCollar de Vino Malbec\nBio textil en base a fécula de maíz\nIngredientes: Resto de vino Malbec, clavo de olor, fécula de maíz, agua, vinagre y glicerina vegetal\nMedidas: 37 x 30 cm\n\n \n(Bordado Malbec)\nTítulo: 33,04401° S, 68,72389° W 06-01-2022 19:40:04\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con vino, porotos negros, cochinilla y nogal\nMedidas: 40 x 50 cm\nAño: 2024  \n\n \n Ahora se disuelven y vuelven al origen, un pago por adelantado con la confianza en un nuevo porvenir.\n \n(Foto Lavanda)\n\nOfrendas, acción ritual de entrega al mar de collar biotextil de lavandas en la costa Atlántica. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales\n\nCollar de Lavandas\nBio textil en base a fécula de maíz\nIngredientes: lavanda, té de tilo, té de manzanilla, fécula de maíz, agua, vinagre y glicerina vegetal\nMedidas: 22 x 22 cm\n\n(Bordado Lavanda)\n\nTítulo: 37,15746° S, 56,88328° W. 26-12-2021. 12:11:13\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con porotos negros, cochinilla, nogal, vino, rosa china\nMedidas: 40 x 50 cm\nAño: 2024 \n \n\nRegar el suelo con las cenizas de las cáscaras entregadas al fuego, ésa es la ofrenda.\n\n(Foto Mandarina)\n\nOfrendas, acción ritual de entrega al fuego de collar biotextil de mandarinas en la montaña de Mendoza. 2022\nRegistro de acción, video monocanal y serie de fotografías digitales.\n\nCollar de Mandarinas\nBiotextil en base a gelatina\nIngredientes: cáscaras de mandarina, gelatina, agua, glicerina vegetal\nMedidas: 50 x 30 cm\n \n\n(Bordado Mandarina)\n\nTítulo: 33,04077° S, 69,10339° W 05-01-2022. 18:54:59\nTécnica: Registro astronómico bordado en hilo artesanal de bambú, lino, ortiga y algodón teñido con cúrcuma, cochinilla y nogal\nMedidas: 40 x 50 cm\nAño: 2024",
+      "en": "Offerings \nThe desire to wear aromas, textures, flavors. Memories transformed into a new skin that yearns to be touched and resignifies the past.\nCreated from organic waste, three biotextile necklaces resignify the past and integrate into new life processes as a second skin. Through rituals of return to water, earth, and fire, these pieces transmute into offerings that connect matter, time, and origin. A symbolic weaving that unites the visible with the ancestral, where form transforms and time is inscribed.\nLike any skin, this one renews itself, initiating a new cycle: the shedding. After witnessing their vital processes, these biotextile works return through rituals as offerings of gratitude to their land of origin—dissolving in water and turning into ashes to nourish the soil once again.\nI capture the celestial chart for the exact day, hour, and location of the offerings. I embroider them with hand-spun threads dyed with organic pigments, fusing the astronomical and spiritual record of the ritual.\nThe audiovisual recording of the ritual action of offering and its subsequent embroidery reinforce the connection between the body, the territory, and the cycles of nature, through which I explore transformation and memory.\nA weaving that recalls the importance of transmutation, becoming, and connecting with desire. Trusting that the sown past can awaken into a new life—and into new lives.\nVideo: https://www.youtube.com/watch?v=Vpzks3-Uldw \n\nSeries: Offerings \nTrusting that the sown past can awaken into a new life and into new lives.\n(Malbec Photo)\nOfferings, ritual action of returning a Malbec biotextile necklace to the earth in a vineyard in Mendoza, Argentina. 2022\nAction record, single-channel video, and digital photograph series\n\nMalbec Wine Necklace\nCornstarch-based biotextile.\nIngredients: Malbec wine residue, cloves, cornstarch, water, vinegar, and vegetable glycerin\nDimensions: 37 x 30 cm\n\n(Malbec Embroidery)\nTitle: 33.04401° S, 68.72389° W 06-01-2022 19:40:04\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with wine, black beans, cochineal, and walnut\nDimensions: 40 x 50 cm\nYear: 2024\n\nNow they dissolve and return to the origin, an advance payment made with trust in a new future.\n(Lavender Photo)\nOfferings, ritual action of returning a lavender biotextile necklace to the sea on the Atlantic coast. 2022\nAction record, single-channel video, and digital photograph series\n\nLavender Necklace\nCornstarch-based biotextile\nIngredients: Lavender, linden tea, chamomile tea, cornstarch, water, vinegar, and vegetable glycerin\nDimensions: 22 x 22 cm\n(Lavender Embroidery)\nTitle: 37.15746° S, 56.88328° W. 26-12-2021. 12:11:13\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with black beans, cochineal, walnut, wine, and hibiscus\nDimensions: 40 x 50 cm\nYear: 2024\n\nTo water the soil with the ashes of the peels given to the fire: that is the offering.\n(Tangerine Photo)\nOfferings, ritual action of returning a tangerine biotextile necklace to the fire in the mountains of Mendoza. 2022\nAction record, single-channel video, and digital photograph series\n\nTangerine Necklace\nGelatin-based biotextile\nIngredients: Tangerine peels, gelatin, water, vegetable glycerin\nDimensions: 50 x 30 cm\n(Tangerine Embroidery)\nTitle: 33.04077° S, 69.10339° W 05-01-2022. 18:54:59\nMedium: Astronomical record embroidered with hand-spun bamboo, linen, nettle, and cotton thread, dyed with turmeric, cochineal, and walnut\nDimensions: 40 x 50 cm\nYear: 2024\n\nVani & Will ver donde poner este video de performance sonora con el Ensamble de Serruchos\n\nhttps://www.youtube.com/watch?v=VmqnA92l37I"
+    },
+    "images": [
+      "works/ofrendas/04.webp",
+      "works/ofrendas/01.webp",
+      "works/ofrendas/02.webp",
+      "works/ofrendas/03.webp",
+      "works/ofrendas/05.webp",
+      "works/ofrendas/06.webp",
+      "works/ofrendas/07.webp"
+    ]
+  },
+  {
     "id": "10",
     "slug": "instalacion-tejido-conectivo",
     "title": {
@@ -228,23 +228,6 @@ export const works: Work[] = [
   },
   {
     "id": "11",
-    "slug": "luz-ambar",
-    "title": {
-      "es": "Luz Ámbar",
-      "en": "Amber Light"
-    },
-    "body": {
-      "es": "Luz Ámbar\n\nConstruida a partir de capas superpuestas de biotextil de kombucha que, mediante un proceso de fermentación, generan una membrana orgánica.\nA través del collage, estas formas se expanden en líneas y planos que dialogan con la luz ámbar, evocando la resina fosilizada que los árboles producen como\ndefensa.\nLa obra propone una experiencia sensorial donde materia, luz y proceso revelan una poética de protección y transformación.\n\n\nTítulo: Luz Ámbar\nTécnica:Instalación conformada por biocuero de celulosa bacteriana\nMedidas: 85 x 85 x 180 cm\nAño: 2022-2025\n\n\nMuestra Ofrendas\nMuseo del Agua, junio - agosto 2024",
-      "en": "Amber Light (Luz Ámbar)\nBuilt from overlapping layers of kombucha biotextile, which generate an organic membrane through a process of fermentation.\nThrough collage, these forms expand into lines and planes that engage with amber light, evoking the fossilized resin that trees produce as a defense mechanism.\nThe work proposes a sensory experience where matter, light, and process reveal the poetics of protection and transformation.\n\n\nTitle: Amber Light\nMedium:Installation composed of bacterial cellulose bioleather\nDimensions: 85 x 85 x 180 cm\nYear: 2022–2025\n\nExhibition: Offerings (Ofrendas)\nWater Museum (Museo del Agua), June – August 2024"
-    },
-    "images": [
-      "works/luz-ambar/01.webp",
-      "works/luz-ambar/03.webp",
-      "works/luz-ambar/04.webp"
-    ]
-  },
-  {
-    "id": "12",
     "slug": "tejido-conectivo-ii",
     "title": {
       "es": "Tejido Conectivo II",
@@ -265,6 +248,23 @@ export const works: Work[] = [
       "works/tejido-conectivo-ii/08.webp",
       "works/tejido-conectivo-ii/09.webp",
       "works/tejido-conectivo-ii/10.webp"
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "luz-ambar",
+    "title": {
+      "es": "Luz Ámbar",
+      "en": "Amber Light"
+    },
+    "body": {
+      "es": "Luz Ámbar\n\nConstruida a partir de capas superpuestas de biotextil de kombucha que, mediante un proceso de fermentación, generan una membrana orgánica.\nA través del collage, estas formas se expanden en líneas y planos que dialogan con la luz ámbar, evocando la resina fosilizada que los árboles producen como\ndefensa.\nLa obra propone una experiencia sensorial donde materia, luz y proceso revelan una poética de protección y transformación.\n\n\nTítulo: Luz Ámbar\nTécnica:Instalación conformada por biocuero de celulosa bacteriana\nMedidas: 85 x 85 x 180 cm\nAño: 2022-2025\n\n\nMuestra Ofrendas\nMuseo del Agua, junio - agosto 2024",
+      "en": "Amber Light (Luz Ámbar)\nBuilt from overlapping layers of kombucha biotextile, which generate an organic membrane through a process of fermentation.\nThrough collage, these forms expand into lines and planes that engage with amber light, evoking the fossilized resin that trees produce as a defense mechanism.\nThe work proposes a sensory experience where matter, light, and process reveal the poetics of protection and transformation.\n\n\nTitle: Amber Light\nMedium:Installation composed of bacterial cellulose bioleather\nDimensions: 85 x 85 x 180 cm\nYear: 2022–2025\n\nExhibition: Offerings (Ofrendas)\nWater Museum (Museo del Agua), June – August 2024"
+    },
+    "images": [
+      "works/luz-ambar/01.webp",
+      "works/luz-ambar/03.webp",
+      "works/luz-ambar/04.webp"
     ]
   },
   {
@@ -289,23 +289,6 @@ export const works: Work[] = [
   },
   {
     "id": "14",
-    "slug": "avyakta",
-    "title": {
-      "es": "Avyakta",
-      "en": "Avyakta"
-    },
-    "body": {
-      "es": "Avyakta\nEl cielo es entendido aquí como un espacio en constante formación. Lo que vemos desde la Tierra ya no es el cielo de ahora, sino un estado pasado del universo, un reflejo de lo que ya fue; la obra habita justamente en ese espacio entre lo que ocurre y lo que se vuelve visible. Mi intención es bordar ese cielo, ese preciso momento de posibilidad.\nEste bordado no propone una constelación ni un mapa del cielo, sino un territorio abierto donde lo visible del cúmulo y la opacidad de la nebulosa conviven como fuerzas latentes. Para ello tomo como referencia:  la nebulosa oscura Barnard 86 entendido como densas nubes de gas y polvo interestelar que bloquean la luz de las estrellas situadas detrás y el cúmulo abierto NGC 6520 entendido como un grupo de estrellas formado a partir de la misma nebulosas y que están unidas gravitacionalmente.\nFrente a esa inmensidad, el bordado se ofrece como un gesto mínimo, un tiempo dilatado de lo manual. A través de la insistencia, la dedicación y el tiempo sostenido del hacer, cada puntada fija una unidad de duración. Es mi forma de ensayar un conocimiento sensible —no científico ni descriptivo— sobre los tiempos siderales y la transformación de la materia. Bordar, entonces, un campo de lo posible: un espacio abierto, en permanente devenir.\n\nTítulo: Avyakta\nTécnica: Bordado con hilos de lurex sobre silobolsa\nMedidas: 33,5 x 47 cm.\nAño: 2026",
-      "en": "Avyakta\nThe sky is understood here as a space in constant formation. What we see from Earth is no longer the sky of the present, but a past state of the universe, a reflection of what once was; the work inhabits precisely that space between what occurs and what becomes visible. My intention is to embroider that sky, that precise moment of possibility.\nThis embroidery does not propose a constellation or a star map, but an open territory where the visibility of the cluster and the opacity of the nebula coexist as latent forces. For this, I take as references the dark nebula Barnard 86—dense clouds of interstellar gas and dust that block the light of stars behind them—and the open cluster NGC 6520, a group of stars formed from the same nebula, bound together by gravity.\nFaced with such immensity, the embroidery presents itself as a minimal gesture, an expanded duration of handwork. Through insistence, dedication, and the sustained time of making, each stitch anchors a unit of duration. It is my way of rehearsing a sensitive knowledge—neither scientific nor descriptive—about sideral time and the transformation of matter. To embroider, then, a field of the possible: an open space, in permanent becoming.\n\nTitle: Avyakta\nMedium: Lurex thread embroidery on silo bag\nDimensions: 33.5 x 47 cm\nYear: 2026"
-    },
-    "images": [
-      "works/avyakta/01.webp",
-      "works/avyakta/02.webp",
-      "works/avyakta/03.webp"
-    ]
-  },
-  {
-    "id": "15",
     "slug": "gravitacion",
     "title": {
       "es": "Gravitación",
@@ -323,6 +306,23 @@ export const works: Work[] = [
       "works/gravitacion/05.webp",
       "works/gravitacion/06.webp",
       "works/gravitacion/07.webp"
+    ]
+  },
+  {
+    "id": "15",
+    "slug": "avyakta",
+    "title": {
+      "es": "Avyakta",
+      "en": "Avyakta"
+    },
+    "body": {
+      "es": "Avyakta\nEl cielo es entendido aquí como un espacio en constante formación. Lo que vemos desde la Tierra ya no es el cielo de ahora, sino un estado pasado del universo, un reflejo de lo que ya fue; la obra habita justamente en ese espacio entre lo que ocurre y lo que se vuelve visible. Mi intención es bordar ese cielo, ese preciso momento de posibilidad.\nEste bordado no propone una constelación ni un mapa del cielo, sino un territorio abierto donde lo visible del cúmulo y la opacidad de la nebulosa conviven como fuerzas latentes. Para ello tomo como referencia:  la nebulosa oscura Barnard 86 entendido como densas nubes de gas y polvo interestelar que bloquean la luz de las estrellas situadas detrás y el cúmulo abierto NGC 6520 entendido como un grupo de estrellas formado a partir de la misma nebulosas y que están unidas gravitacionalmente.\nFrente a esa inmensidad, el bordado se ofrece como un gesto mínimo, un tiempo dilatado de lo manual. A través de la insistencia, la dedicación y el tiempo sostenido del hacer, cada puntada fija una unidad de duración. Es mi forma de ensayar un conocimiento sensible —no científico ni descriptivo— sobre los tiempos siderales y la transformación de la materia. Bordar, entonces, un campo de lo posible: un espacio abierto, en permanente devenir.\n\nTítulo: Avyakta\nTécnica: Bordado con hilos de lurex sobre silobolsa\nMedidas: 33,5 x 47 cm.\nAño: 2026",
+      "en": "Avyakta\nThe sky is understood here as a space in constant formation. What we see from Earth is no longer the sky of the present, but a past state of the universe, a reflection of what once was; the work inhabits precisely that space between what occurs and what becomes visible. My intention is to embroider that sky, that precise moment of possibility.\nThis embroidery does not propose a constellation or a star map, but an open territory where the visibility of the cluster and the opacity of the nebula coexist as latent forces. For this, I take as references the dark nebula Barnard 86—dense clouds of interstellar gas and dust that block the light of stars behind them—and the open cluster NGC 6520, a group of stars formed from the same nebula, bound together by gravity.\nFaced with such immensity, the embroidery presents itself as a minimal gesture, an expanded duration of handwork. Through insistence, dedication, and the sustained time of making, each stitch anchors a unit of duration. It is my way of rehearsing a sensitive knowledge—neither scientific nor descriptive—about sideral time and the transformation of matter. To embroider, then, a field of the possible: an open space, in permanent becoming.\n\nTitle: Avyakta\nMedium: Lurex thread embroidery on silo bag\nDimensions: 33.5 x 47 cm\nYear: 2026"
+    },
+    "images": [
+      "works/avyakta/01.webp",
+      "works/avyakta/02.webp",
+      "works/avyakta/03.webp"
     ]
   },
   {

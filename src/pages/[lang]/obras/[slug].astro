@@ -5,6 +5,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLanguage, languages } from '../../../i18n';
 import imageSizes from '../../../work-image-sizes.json';
 import { works } from '../../../works-content';
+import { workCovers } from '../../../work-covers';
+import workTexts from '../../../work-texts.json';
 
 export function getStaticPaths() {
   return languages.flatMap((lang) => works.map((work) => ({ params: { lang, slug: work.slug } })));
@@ -21,15 +23,12 @@ if (!work) {
 
 const base = import.meta.env.BASE_URL;
 const dimensions: Record<string, number[]> = imageSizes;
-const paragraphs = work.body[lang]
-  .split(/\n\s*\n/)
-  .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
-  .filter(Boolean);
+const text = (workTexts as Record<string, Record<string, { html: string; text: string; links: { url: string; kind: string }[] }>>)[work.slug][lang];
 ---
 
 <BaseLayout lang={lang} title={`${work.title[lang]} — Elia Gasparolo`}
-  description={`${work.title[lang]} — Elia Gasparolo. ${paragraphs.join(' ').replace(/\s+/g, ' ').slice(0, 145)}…`}
-  image={`${base}${work.images[0]}`} artwork={{ name: work.title[lang], images: work.images.map(image => `${base}${image}`) }}>
+  description={`${work.title[lang]} — Elia Gasparolo. ${text.text.replace(/\s+/g, ' ').slice(0, 145)}…`}
+  image={`${base}${workCovers[work.slug]}`} artwork={{ name: work.title[lang], images: work.images.map(image => `${base}${image}`) }}>
   <article class="work-page">
     <div class="work-stage">
     <h1 class="section-title">{work.title[lang]}</h1>
@@ -50,7 +49,10 @@ const paragraphs = work.body[lang]
     </div>
     </div>
     <div class="work-text">
-      {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <div class="formatted-text" set:html={text.html} />
+      {text.links.length > 0 && <div class="work-links">
+        {text.links.map((link) => <a class="resource-link" href={link.url} target="_blank" rel="noopener noreferrer">{link.kind === 'video' ? (lang === 'es' ? 'Ver video' : 'Watch video') : (lang === 'es' ? 'Ver sitio web' : 'Visit website')}</a>)}
+      </div>}
     </div>
   </article>
 </BaseLayout>
@@ -106,7 +108,10 @@ const paragraphs = work.body[lang]
   button:disabled { visibility: hidden; }
   button:hover svg { opacity: .65; }
   .work-text { font-size: .9rem; line-height: 1.75; margin: 3rem 3cqw 5rem; max-width: 44rem; }
-  .work-text p { margin: 0; }
-  .work-text p + p { margin-top: 1.15rem; }
+  .formatted-text :global(p) { margin: 0; min-height: 1em; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 4; }
+  .formatted-text :global(strong) { font-weight: 700; }
+  .work-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+  .resource-link { border-bottom: 1px solid currentColor; display: inline-block; font-size: .8rem; padding-bottom: .15rem; }
+  .resource-link:hover { color: var(--muted); }
   @media(max-width: 600px) { .section-title { padding: 1rem 4vw 0; } .work-text { margin-inline: 4vw; } }
 </style>
