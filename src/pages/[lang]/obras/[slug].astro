@@ -40,6 +40,13 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
           <img width={dimensions[image][0]} height={dimensions[image][1]} src={`${base}${image}`} alt={`${work.title[lang]} — ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
         </figure>
       ))}
+      {work.videos?.map(video => (
+        <figure style={`aspect-ratio: ${video.width} / ${video.height}`}>
+          <video width={video.width} height={video.height} autoplay muted loop playsinline preload="none" data-src={`${base}${video.src}`} poster={`${base}${video.poster}`} aria-label={video.title[lang]}>
+            <a href={`${base}${video.src}`}>{lang === 'es' ? 'Ver video' : 'Watch video'}: {video.title[lang]}</a>
+          </video>
+        </figure>
+      ))}
     </div>
 
     <div class="gallery-controls">
@@ -51,7 +58,15 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
     <div class="work-text">
       <div class="formatted-text" set:html={text.html} />
       {text.links.length > 0 && <div class="work-links">
-        {text.links.map((link) => <a class="resource-link" href={link.url} target="_blank" rel="noopener noreferrer">{link.kind === 'video' ? (lang === 'es' ? 'Ver video' : 'Watch video') : (lang === 'es' ? 'Ver sitio web' : 'Visit website')}</a>)}
+        {text.links.map((link) => work.slug === 'ofrendas' && link.kind === 'video'
+          ? <a class="video-preview" href={link.url} target="_blank" rel="noopener noreferrer">
+              <span class="video-thumbnail">
+                <img src={`${base}works/ofrendas/video-thumbnail.webp`} width="480" height="360" loading="lazy" alt="" />
+                <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" /><path d="m20 15 14 9-14 9z" /></svg>
+              </span>
+              <span class="resource-link">{lang === 'es' ? 'Ver video' : 'Watch video'}</span>
+            </a>
+          : <a class="resource-link" href={link.url} target="_blank" rel="noopener noreferrer">{link.kind === 'video' ? (lang === 'es' ? 'Ver video' : 'Watch video') : (lang === 'es' ? 'Ver sitio web' : 'Visit website')}</a>)}
       </div>}
     </div>
   </article>
@@ -82,10 +97,28 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
     };
     previous.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
-    track.addEventListener('keydown', event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } });
+    track.addEventListener('keydown', event => { if (event.target instanceof HTMLVideoElement) return; if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1); } });
     track.addEventListener('scroll', update, { passive: true });
     new ResizeObserver(update).observe(track);
     track.querySelectorAll('img').forEach(image => image.addEventListener('load', update));
+    const videos = Array.from(track.querySelectorAll('video'));
+    const updateVideo = (video: HTMLVideoElement) => {
+      if (video.dataset.visible === 'true' && !document.hidden) {
+        if (!video.hasAttribute('src')) {
+          video.src = video.dataset.src!;
+          video.load();
+        }
+        video.muted = true;
+        void video.play().catch(() => { /* Keep the poster if autoplay is unavailable. */ });
+      } else video.pause();
+    };
+    const visibility = new IntersectionObserver(entries => entries.forEach(entry => {
+      const video = entry.target as HTMLVideoElement;
+      video.dataset.visible = String(entry.isIntersecting);
+      updateVideo(video);
+    }), { threshold: .01 });
+    videos.forEach(video => visibility.observe(video));
+    document.addEventListener('visibilitychange', () => videos.forEach(updateVideo));
     update();
   });
 </script>
@@ -100,6 +133,7 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
   .work-slider::-webkit-scrollbar { display: none; }
   figure { flex: 0 0 auto; height: 100%; width: auto; min-width: 0; margin: 0; scroll-snap-align: start; }
   figure img { display: block; height: 100%; width: 100%; max-width: none; }
+  figure video { display: block; height: 100%; width: 100%; object-fit: contain; background: #000; }
   .gallery-controls { position: absolute; inset: 0; pointer-events: none; }
   button { background: transparent; border: 0; color: white; cursor: pointer; height: 44px; width: 44px; padding: 9.2px; position: absolute; top: 50%; transform: translateY(-50%); pointer-events: auto; filter: drop-shadow(0 1px 2px #000a); }
   [data-gallery-prev] { left: 1cqw; }
@@ -113,5 +147,12 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
   .work-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
   .resource-link { border-bottom: 1px solid currentColor; display: inline-block; font-size: .8rem; padding-bottom: .15rem; }
   .resource-link:hover { color: var(--muted); }
+  .video-preview { display: grid; gap: .75rem; justify-items: start; width: min(15rem, 100%); }
+  .video-thumbnail { display: block; position: relative; width: 100%; }
+  .video-thumbnail img { display: block; width: 100%; height: auto; }
+  .video-thumbnail svg { position: absolute; width: 3rem; height: 3rem; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .video-thumbnail circle { fill: #0006; stroke: #fff; stroke-width: 1; }
+  .video-thumbnail path { fill: #fff; }
+  .video-preview:hover .video-thumbnail svg { opacity: .75; }
   @media(max-width: 600px) { .section-title { padding: 1rem 4vw 0; } .work-text { margin-inline: 4vw; } }
 </style>

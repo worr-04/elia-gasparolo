@@ -1,0 +1,11 @@
+<footer class="site-footer">
+  <span>Web Design</span><span aria-hidden="true"> — </span><a href="https://www.ninalauria.nyc" target="_blank" rel="noopener noreferrer">www.ninalauria.nyc</a>
+</footer>
+
+<style>
+  .site-footer { flex-shrink: 0; color: var(--muted); font-size: .625rem; font-weight: 400; line-height: 1.5; padding: .75rem 3vw 1rem; text-align: right; }
+  a:hover, a:focus-visible { color: var(--ink); }
+  :global([data-variant="2"]) .site-footer { margin-left: 20%; width: 80%; padding-right: var(--sidebar-edge-space); }
+  @media (max-width: 899px) { :global([data-variant="2"]) .site-footer { margin-left: 0; width: 100%; } }
+  @media (max-width: 600px) { .site-footer { padding-inline: 4vw; } }
+</style>

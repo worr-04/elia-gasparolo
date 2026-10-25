@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { routeContext } from '../routing';
 import LegacyHeader from '../components/LegacyHeader.astro';
 import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import type { Language } from '../i18n';
 import { canonicalPath, sectionDescription, serializeJsonLd } from '../seo';
 import socialImage from '../assets/elia-gasparolo-bio.webp';
@@ -84,17 +85,18 @@ Astro.csp?.insertScriptHash(`sha256-${createHash('sha256').update(jsonLd).digest
         <slot />
       </main>
     </div>
+    <SiteFooter />
   </body>
 </html>
 
 <style>
-  .site-shell { min-height: 100svh; padding-top: var(--header-height); }
-  main { min-width: 0; width: 100%; container-type: inline-size; container-name: content; --content-header-height: var(--header-height); }
-  :global([data-variant="1"].menu-interacted) main { transition: transform var(--menu-duration) var(--menu-ease); }
-  :global([data-variant="1"].menu-is-open) main { transform: translateX(calc(-1 * var(--menu-width))); }
-  @media (prefers-reduced-motion: reduce) { :global([data-variant="1"].menu-interacted) main { transition: none; } }
+  .site-shell { display: flex; flex-direction: column; min-height: 100svh; padding-top: var(--header-height); }
+  main { flex: 1; min-width: 0; width: 100%; container-type: inline-size; container-name: content; --content-header-height: var(--header-height); }
+  :global([data-variant="1"].menu-interacted) :is(main, .site-footer) { transition: transform var(--menu-duration) var(--menu-ease); }
+  :global([data-variant="1"].menu-is-open) :is(main, .site-footer) { transform: translateX(calc(-1 * var(--menu-width))); }
+  @media (prefers-reduced-motion: reduce) { :global([data-variant="1"].menu-interacted) :is(main, .site-footer) { transition: none; } }
   .full-viewport { height: 100svh; }
-  .full-viewport main { height: 100%; }
+  .full-viewport main { height: auto; min-height: 0; }
   @media (min-width: 900px) {
     :global([data-variant="2"]) .site-shell { padding-top: 0; }
     :global([data-variant="2"]) main { margin-left: 20%; width: 80%; --content-header-height: 0px; }

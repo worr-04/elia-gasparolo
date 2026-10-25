@@ -8,7 +8,7 @@ export default defineConfig({
     csp: {
       directives: [
         "default-src 'self'", "object-src 'none'", "base-uri 'none'",
-        "form-action 'none'", "frame-src 'none'", "img-src 'self' data:",
+        "form-action 'none'", "frame-src 'none'", "img-src 'self' data:", "media-src 'self'",
         "font-src 'self' https://fonts.gstatic.com",
       ],
       styleDirective: { resources: [

@@ -63,10 +63,12 @@ for page in pages:
                 except ValueError: page.fail('invalid JSON-LD')
     for tag,attrs in page.nodes:
         if any(key.startswith('on') for key in attrs): page.fail('inline event handler')
+        if tag == 'video' and not all(key in attrs for key in ('autoplay','muted','loop','playsinline','width','height','poster','aria-label')): page.fail('video lacks loop playback attributes, dimensions, poster or label')
+        if tag == 'video' and 'controls' in attrs: page.fail('gallery video unexpectedly has controls')
         if tag == 'img' and not all(key in attrs for key in ('alt','width','height')): page.fail('image lacks alt or dimensions')
         if tag == 'a' and attrs.get('target') == '_blank' and 'noopener' not in attrs.get('rel',''): page.fail('unsafe external link')
         if tag == 'link' and attrs.get('rel') in ('canonical','alternate') and 'Caminografico' in attrs.get('href',''): page.fail('SEO URL points to a proposal')
-        urls = [attrs[k] for k in ('href','src') if attrs.get(k)]
+        urls = [attrs[k] for k in ('href','src','poster','data-src') if attrs.get(k)]
         urls += [item.strip().split(' ')[0] for item in attrs.get('srcset','').split(',') if item.strip()]
         for url in urls:
             if url.lower().startswith(('javascript:', 'http:')): page.fail('unsafe URL scheme')

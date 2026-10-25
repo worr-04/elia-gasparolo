@@ -35,11 +35,13 @@ const route = routeContext(Astro.url.pathname);
 
       <aside class="works-index" aria-label={copy[lang].navigation.works}>
         <ol class="works-legend">
-          {works.map((work, index) => (
-            <li data-work={work.slug}>
-              <a href={route.href(`obras/${work.slug}`)} data-work-trigger={work.slug}><span>{index + 1}.</span> {work.title[lang]}</a>
-            </li>
-          ))}
+          {works.map((work, index) => {
+            const words = work.title[lang].split(' ');
+            const lastWord = words.pop();
+            return <li data-work={work.slug}>
+              <a href={route.href(`obras/${work.slug}`)} data-work-trigger={work.slug}><span class="work-number">{index + 1}.</span> {words.join(' ')}{' '}<span class="work-ending">{lastWord}{index < works.length - 1 && <span class="separator" aria-hidden="true">{' ·'}</span>}</span></a>{' '}
+            </li>;
+          })}
         </ol>
       </aside>
     </div>
@@ -75,8 +77,9 @@ const route = routeContext(Astro.url.pathname);
   .works-index { position: sticky; top: calc(var(--content-header-height) + 2rem); max-height: calc(100svh - var(--content-header-height) - 4rem); overflow-y: auto; }
   .works-legend { color: #6e7357; font-size: .75rem; line-height: 1.8; list-style: none; margin: 0; padding: 0; }
   .works-legend li { display: inline; }
-  .works-legend li:not(:last-child)::after { content: ' · '; color: var(--line); }
-  .works-legend span { color: var(--ink); }
+  .work-ending { white-space: nowrap; }
+  .separator { color: var(--line); }
+  .work-number { color: var(--ink); }
   .works-legend a:hover, .works-legend a:focus-visible { text-decoration: underline; }
   .works-legend li.is-highlighted { background: #6e735725; color: var(--ink); }
   @container content (max-width: 1100px) { .works-layout { grid-template-columns: 1fr; } .works-index { max-height: none; position: static; padding-top: 2rem; } }

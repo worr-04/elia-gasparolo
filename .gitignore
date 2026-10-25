@@ -3,7 +3,6 @@ dist/
 .astro/
 .DS_Store
 *.log
-src/assets/home/*.webp
 
 .env
 .env.*

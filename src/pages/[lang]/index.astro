@@ -10,6 +10,7 @@ import intocable from '../../assets/home-final/03-home.webp';
 import reliquias from '../../assets/home-final/04-home.webp';
 import accion from '../../assets/home-final/05-home.webp';
 import reliquiasMarco from '../../assets/home-final/06-home.webp';
+import proyeccion from '../../assets/home-final/07-home.webp';
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -25,6 +26,7 @@ const works = [
   { image: reliquias, title: 'Reliquias' },
   { image: accion, title: lang === 'es' ? 'Acción con fuego entre rocas' : 'Action with fire among rocks' },
   { image: reliquiasMarco, title: 'Reliquias' },
+  { image: proyeccion, title: lang === 'es' ? 'Cuerpo y proyección de luz' : 'Body and light projection' },
 ];
 ---
 
