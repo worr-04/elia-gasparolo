@@ -33,8 +33,9 @@ GitHub Actions ejecuta build y verify antes de publicar un push a `main`.
 - Diseño, textos y prensa: sus archivos `src/*-content.ts`.
 - SEO de secciones: `src/seo.ts`. Metadatos y datos estructurados: `src/layouts/BaseLayout.astro`.
 
-El carrusel conserva la proporción de las fotos y recorre un ancho visible cada 20 segundos,
-adaptando la velocidad al tamaño de pantalla. Se configura en `WorkSlider.astro` con `secondsPerViewport`.
+El carrusel conserva la proporción de las fotos y mantiene un ritmo medio de 10 segundos por imagen.
+La velocidad se calcula a partir del ancho de las fotografías, manteniendo el ritmo entre tamaños de pantalla.
+Se configura en `WorkSlider.astro` con `secondsPerImage`.
 Permite arrastrar con mouse/dedo, navegar con flechas y pausar con espacio cuando tiene foco;
 respeta la preferencia de movimiento reducido. Las imágenes originales no se modifican.
 
