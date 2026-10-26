@@ -30,6 +30,13 @@ import rabdomante03 from '../../../assets/design-realization/rabdomante-03.webp'
 import robotika01 from '../../../assets/design-realization/robotika-01.webp';
 import robotika02 from '../../../assets/design-realization/robotika-02.webp';
 
+import gutsies20261 from '../../../assets/design-realization/gutsies-2026-01.webp';
+import gutsies20262 from '../../../assets/design-realization/gutsies-2026-02.webp';
+import gutsies20263 from '../../../assets/design-realization/gutsies-2026-03.webp';
+import gutsies20251 from '../../../assets/design-realization/gutsies-2025-01.webp';
+import gutsies20252 from '../../../assets/design-realization/gutsies-2025-02.webp';
+import gutsies20253 from '../../../assets/design-realization/gutsies-2025-03.webp';
+
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
 }
@@ -38,6 +45,8 @@ const requestedLang = routeContext(Astro.url.pathname).lang;
 const lang: Language = isLanguage(requestedLang) ? requestedLang : 'es';
 const t = designContent[lang];
 const projects = [
+  ['gutsies2026', [gutsies20261, gutsies20262, gutsies20263]],
+  ['gutsies2025', [gutsies20251, gutsies20252, gutsies20253]],
   ['nube', [nube01]],
   ['pijama', [pijama01, pijama02, pijama03, pijama04, pijama05, pijama06]],
   ['origen', [origen01, origen02]],
@@ -72,7 +81,7 @@ const projects = [
                 <div class="gallery-column">
                   {column.map((image, index) => (
                     <figure>
-                      <Image src={image} alt={`${project.title} — ${columnIndex * splitAt + index + 1}`} widths={[640, 960, 1280, 1920]} sizes="(max-width: 899px) 92vw, 36vw" loading={id === 'nube' && index === 0 ? 'eager' : 'lazy'} />
+                      <Image src={image} alt={`${project.title} — ${columnIndex * splitAt + index + 1}`} widths={[640, 960, 1280, 1920]} sizes="(max-width: 899px) 92vw, 36vw" loading={id === 'gutsies2026' && index === 0 ? 'eager' : 'lazy'} />
                     </figure>
                   ))}
                 </div>
@@ -81,7 +90,7 @@ const projects = [
             <div class="mobile-gallery" aria-label={`${lang === 'es' ? 'Imágenes de' : 'Images of'} ${project.title}`}>
               {images.map((image, index) => (
                 <figure>
-                  <Image src={image} alt={`${project.title} — ${index + 1}`} widths={[640, 960, 1280]} sizes="84vw" loading={id === 'nube' && index === 0 ? 'eager' : 'lazy'} />
+                  <Image src={image} alt={`${project.title} — ${index + 1}`} widths={[640, 960, 1280]} sizes="84vw" loading={id === 'gutsies2026' && index === 0 ? 'eager' : 'lazy'} />
                 </figure>
               ))}
             </div>

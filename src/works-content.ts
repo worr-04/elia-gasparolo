@@ -5,6 +5,7 @@ export type Work = {
   slug: string;
   title: Record<Language, string>;
   images: string[];
+  gallery?: { type: 'image' | 'video'; src: string }[];
   videos?: { src: string; poster: string; title: Record<Language, string>; width: number; height: number }[];
 };
 
@@ -164,10 +165,10 @@ export const works: Work[] = [
       "en": "Offerings"
     },
     "images": [
-      "works/ofrendas/04.webp",
-      "works/ofrendas/01.webp",
       "works/ofrendas/02.webp",
       "works/ofrendas/03.webp",
+      "works/ofrendas/04.webp",
+      "works/ofrendas/01.webp",
       "works/ofrendas/05.webp",
       "works/ofrendas/06.webp",
       "works/ofrendas/07.webp",
@@ -205,6 +206,60 @@ export const works: Work[] = [
         },
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "gallery": [
+      {
+        "type": "image",
+        "src": "works/ofrendas/02.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/03.webp"
+      },
+      {
+        "type": "video",
+        "src": "works/ofrendas/ofrenda-malbec.mp4"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/04.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/01.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/05.webp"
+      },
+      {
+        "type": "video",
+        "src": "works/ofrendas/ofrenda-lavanda.mp4"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/06.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/07.webp"
+      },
+      {
+        "type": "video",
+        "src": "works/ofrendas/ofrenda-mandarina.mp4"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/08.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/09.webp"
+      },
+      {
+        "type": "image",
+        "src": "works/ofrendas/10.webp"
       }
     ]
   },

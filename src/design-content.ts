@@ -13,6 +13,20 @@ export const designContent: Record<Language, { title: string; videoLabel: string
     title: 'Diseño y Realización',
     videoLabel: 'Ver video',
     projects: {
+      gutsies2026: {
+        "title": "Gutsies Awards 2026",
+        "credit": "Premio diseñado por Gaspar Libedinsky.",
+        "paragraphs": [
+          "El Premio Gutsy reconoce a quienes mejor representan los valores fundamentales de la agencia GUT: coraje, transparencia e intuición."
+        ]
+      },
+      gutsies2025: {
+        "title": "Gutsies Awards 2025",
+        "credit": "Premio diseñado por Gaspar Libedinsky.",
+        "paragraphs": [
+          "El Premio Gutsy reconoce a quienes mejor representan los valores fundamentales de la agencia GUT: coraje, transparencia e intuición."
+        ]
+      },
       nube: {
         title: 'Nube',
         credit: 'Nube de Gaspar Libedinsky',
@@ -71,6 +85,20 @@ export const designContent: Record<Language, { title: string; videoLabel: string
     title: 'Design & Realization',
     videoLabel: 'Watch video',
     projects: {
+      gutsies2026: {
+        "title": "Gutsies Awards 2026",
+        "credit": "Award designed by Gaspar Libedinsky.",
+        "paragraphs": [
+          "The Gutsy Award recognizes those who best embody GUT agency’s core values: Courage, Transparency, and Intuition."
+        ]
+      },
+      gutsies2025: {
+        "title": "Gutsies Awards 2025",
+        "credit": "Award designed by Gaspar Libedinsky.",
+        "paragraphs": [
+          "The Gutsy Award recognizes those who best embody GUT agency’s core values: Courage, Transparency, and Intuition."
+        ]
+      },
       nube: {
         title: 'Nube',
         credit: 'Nube by Gaspar Libedinsky',

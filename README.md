@@ -27,6 +27,7 @@ GitHub Actions ejecuta build y verify antes de publicar un push a `main`.
 - Home: selección explícita en `src/pages/[lang]/index.astro`, imágenes en `src/assets/home-final/`.
 - Obras y orden: `src/works-content.ts`. Textos con formato y enlaces al pie: `src/work-texts.json`.
   Para reimportarlos desde los Word: `python3 scripts/import-work-texts.py "/ruta/Obras actualizacion"`.
+  El texto actualizado de Ofrendas, con imágenes intercaladas, puede indicarse con `--ofrendas-source "/ruta/ofrendas"`.
 - Portadas: `src/work-covers.ts`; dimensiones originales: `src/work-image-sizes.json`.
 - Biografía y navegación: `src/i18n.ts`.
 - Diseño, textos y prensa: sus archivos `src/*-content.ts`.

@@ -23,6 +23,15 @@ if (!work) {
 
 const base = import.meta.env.BASE_URL;
 const dimensions: Record<string, number[]> = imageSizes;
+const slides = (work.gallery ?? [
+  ...work.images.map(src => ({ type: 'image' as const, src })),
+  ...(work.videos ?? []).map(video => ({ type: 'video' as const, src: video.src })),
+]).map(item => {
+  if (item.type === 'image') return { type: 'image' as const, src: item.src, width: dimensions[item.src][0], height: dimensions[item.src][1] };
+  const video = work.videos?.find(video => video.src === item.src);
+  if (!video) throw new Error(`Missing gallery video: ${item.src}`);
+  return { ...video, type: 'video' as const };
+});
 const text = (workTexts as Record<string, Record<string, { html: string; text: string; links: { url: string; kind: string }[] }>>)[work.slug][lang];
 ---
 
@@ -35,16 +44,13 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
 
     <div class="gallery">
     <div class="work-slider" id="work-gallery" tabindex="0" role="region" aria-label={work.title[lang]}>
-      {work.images.map((image, index) => (
-        <figure style={`aspect-ratio: ${dimensions[image][0]} / ${dimensions[image][1]}`}>
-          <img width={dimensions[image][0]} height={dimensions[image][1]} src={`${base}${image}`} alt={`${work.title[lang]} — ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
-        </figure>
-      ))}
-      {work.videos?.map(video => (
-        <figure style={`aspect-ratio: ${video.width} / ${video.height}`}>
-          <video width={video.width} height={video.height} autoplay muted loop playsinline preload="none" data-src={`${base}${video.src}`} poster={`${base}${video.poster}`} aria-label={video.title[lang]}>
-            <a href={`${base}${video.src}`}>{lang === 'es' ? 'Ver video' : 'Watch video'}: {video.title[lang]}</a>
-          </video>
+      {slides.map((slide, index) => (
+        <figure style={`aspect-ratio: ${slide.width} / ${slide.height}`}>
+          {slide.type === 'image'
+            ? <img width={slide.width} height={slide.height} src={`${base}${slide.src}`} alt={`${work.title[lang]} — ${index + 1}`} loading={index > 1 ? 'lazy' : 'eager'} />
+            : <video width={slide.width} height={slide.height} autoplay muted loop playsinline preload="none" data-src={`${base}${slide.src}`} poster={`${base}${slide.poster}`} aria-label={slide.title[lang]}>
+                <a href={`${base}${slide.src}`}>{lang === 'es' ? 'Ver video' : 'Watch video'}: {slide.title[lang]}</a>
+              </video>}
         </figure>
       ))}
     </div>
@@ -56,12 +62,12 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
     </div>
     </div>
     <div class="work-text">
-      <div class="formatted-text" set:html={text.html} />
+      <div class="formatted-text" set:html={text.html.replaceAll('__BASE_URL__', base)} />
       {text.links.length > 0 && <div class="work-links">
         {text.links.map((link) => work.slug === 'ofrendas' && link.kind === 'video'
           ? <a class="video-preview" href={link.url} target="_blank" rel="noopener noreferrer">
               <span class="video-thumbnail">
-                <img src={`${base}works/ofrendas/video-thumbnail.webp`} width="480" height="360" loading="lazy" alt="" />
+                <img src={`${base}works/ofrendas/04.webp`} width="1600" height="1200" loading="lazy" alt="" />
                 <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" /><path d="m20 15 14 9-14 9z" /></svg>
               </span>
               <span class="resource-link">{lang === 'es' ? 'Ver video' : 'Watch video'}</span>
@@ -143,11 +149,13 @@ const text = (workTexts as Record<string, Record<string, { html: string; text: s
   button:hover svg { opacity: .65; }
   .work-text { font-size: .9rem; line-height: 1.75; margin: 3rem 3cqw 5rem; max-width: 44rem; }
   .formatted-text :global(p) { margin: 0; min-height: 1em; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 4; }
+  .formatted-text :global(.inline-artwork) { margin: 2rem 0; width: 100%; height: auto; }
+  .formatted-text :global(.inline-artwork img) { display: block; width: 100%; height: auto; }
   .formatted-text :global(strong) { font-weight: 700; }
   .work-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
   .resource-link { border-bottom: 1px solid currentColor; display: inline-block; font-size: .8rem; padding-bottom: .15rem; }
   .resource-link:hover { color: var(--muted); }
-  .video-preview { display: grid; gap: .75rem; justify-items: start; width: min(15rem, 100%); }
+  .video-preview { display: grid; gap: .75rem; justify-items: start; width: 100%; }
   .video-thumbnail { display: block; position: relative; width: 100%; }
   .video-thumbnail img { display: block; width: 100%; height: auto; }
   .video-thumbnail svg { position: absolute; width: 3rem; height: 3rem; top: 50%; left: 50%; transform: translate(-50%, -50%); }

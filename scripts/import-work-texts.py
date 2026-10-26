@@ -13,7 +13,21 @@ def props(el):
     return {c.tag.removeprefix(W): {k.removeprefix(W):v for k,v in c.attrib.items()} for c in el} if el is not None else {}
 def val(p,k,default=None): return p.get(k,{}).get('val',default)
 def enabled(p,k): return k in p and val(p,k,'1') not in ('0','false','off','none')
-def parse(path, neutral_colors=False):
+OFRENDAS_IMAGES = {
+    'foto malbec': ('02.webp', 'Ofrenda Malbec'),
+    'bordado malbec': ('03.webp', 'Cielo Ofrenda Malbec'),
+    'foto lavanda': ('04.webp', 'Ofrenda Lavandas'),
+    'bordado lavanda': ('05.webp', 'Cielo Ofrenda Lavandas'),
+    'foto mandarina': ('06.webp', 'Ofrenda Mandarinas'),
+    'bordado mandarina': ('07.webp', 'Cielo Ofrendas Mandarinas'),
+    'malbec photo': ('02.webp', 'Malbec Offering'),
+    'malbec embroidery': ('03.webp', 'Malbec Offering embroidery'),
+    'lavender photo': ('04.webp', 'Lavender Offering'),
+    'lavender embroidery': ('05.webp', 'Lavender Offering embroidery'),
+    'tangerine photo': ('06.webp', 'Tangerine Offering'),
+    'tangerine embroidery': ('07.webp', 'Tangerine Offering embroidery'),
+}
+def parse(path, neutral_colors=False, inline_images=None):
     z=zipfile.ZipFile(path)
     root=ET.fromstring(z.read('word/document.xml'))
     styles=ET.fromstring(z.read('word/styles.xml'))
@@ -37,6 +51,13 @@ def parse(path, neutral_colors=False):
         if re.search(pattern,raw):
             remaining=re.sub(pattern,'',raw).strip()
             if not remaining or remaining.lower().strip(' :') in ('video','vídeo'):continue
+        marker = re.match(r'\s*\(([^)]+)\)', raw)
+        if marker and inline_images and marker[1].strip().lower() in inline_images:
+            name, alt = inline_images[marker[1].strip().lower()]
+            image = 'works/ofrendas/' + name
+            width, height = json.loads(Path('src/work-image-sizes.json').read_text())[image]
+            paragraphs.append(f'<figure class="inline-artwork"><img src="__BASE_URL__{image}" width="{width}" height="{height}" alt="{html.escape(alt, quote=True)}" loading="lazy" /></figure>')
+            continue
         if re.fullmatch(r'\s*\([^)]*(?:foto|photo|bordado|embroidery)[^)]*\)\s*', raw, re.I):continue
         pp=props(p.find('w:pPr',NS)); sid=val(pp,'pStyle',normal)
         pp={**dp,**inherited(sid,'pPr'),**pp}
@@ -77,19 +98,26 @@ def parse(path, neutral_colors=False):
         if not content:content='<br />'
         paragraphs.append('<p'+(' style="'+';'.join(css)+'"' if css else '')+'>'+content+'</p>')
         plain.append(re.sub(pattern,'',raw))
-    return {'html':''.join(paragraphs),'text':'\n'.join(plain),'videos':links,'source':path.name}
+    body = ''.join(paragraphs)
+    if inline_images:
+        empty = r'<p(?: style="[^"]*")?>(?:\s|<br\s*/?>)*</p>'
+        body = re.sub(r'(?:' + empty + r')+(?=<figure class="inline-artwork">)', '', body)
+        body = re.sub(r'(?<=</figure>)(?:' + empty + r')+', '', body)
+        body = re.sub(r'(?:' + empty + r')+$', '', body)
+    return {'html':body,'text':'\n'.join(plain),'videos':links,'source':path.name}
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('source',type=Path);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('source',type=Path);ap.add_argument('--ofrendas-source',type=Path);args=ap.parse_args()
     result={}
     dirs=sorted(p for p in args.source.iterdir() if p.is_dir())
     assert len(dirs)==25
     for i,(d,slug,es) in enumerate(zip(dirs,SLUGS,ES),1):
+        if slug=='ofrendas' and args.ofrendas_source: d=args.ofrendas_source
         files=[f for f in d.glob('*.docx') if 'ficha' not in f.name.lower()]
         spanish=next(f for f in files if norm(f.stem)==norm(es))
         english=next(f for f in files if f!=spanish)
         assert len(files)==2,(d,files)
-        result[slug]={'es':parse(spanish,slug=='ofrendas'),'en':parse(english,slug=='ofrendas')}
+        result[slug]={'es':parse(spanish,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None),'en':parse(english,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None)}
         # Both language versions refer to the same artwork videos.
         videos=list(dict.fromkeys(result[slug]['es']['videos']+result[slug]['en']['videos']))
         if slug=='ofrendas': videos=videos[:1]
