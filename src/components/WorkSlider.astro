@@ -32,7 +32,8 @@ const es = Astro.url.pathname.indexOf('/en/') === -1;
     let offset = 0;
     let width = 0;
     let previousTime = 0;
-    const speed = 60; // Constant CSS pixels per second, independent of screen size.
+    const secondsPerViewport = 20; // Traverse one visible carousel width in 20 seconds.
+    let speed = 0;
     let pointer: number | null = null;
     let lastX = 0;
     let lastTime = 0;
@@ -43,6 +44,7 @@ const es = Astro.url.pathname.indexOf('/en/') === -1;
     const render = () => { track.style.transform = `translate3d(${-offset}px, 0, 0)`; };
     const measure = () => {
       const height = slider.clientHeight;
+      speed = slider.clientWidth / secondsPerViewport;
       const gap = parseFloat(getComputedStyle(sequence).columnGap) || 0;
       const figures = Array.from(sequence.querySelectorAll<HTMLElement>('figure'));
       if (!height || !figures.length) return;
