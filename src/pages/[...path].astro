@@ -1,0 +1,28 @@
+---
+import Home from '../views/pages/index.astro';
+import Bio from '../views/pages/bio/index.astro';
+import Works from '../views/pages/obras/index.astro';
+import Work from '../views/pages/obras/[slug].astro';
+import Collaborations from '../views/pages/colaboraciones/index.astro';
+import Text from '../views/pages/texto/index.astro';
+import Press from '../views/pages/prensa/index.astro';
+import { works } from '../works-content';
+import { localizedPage, routeContext } from '../routing';
+
+export function getStaticPaths() {
+  const pages = ['', 'bio', 'obras', 'colaboraciones', 'texto', 'prensa', ...works.map(work => `obras/${work.slug}`)];
+  const paths = new Set<string>();
+  for (const lang of ['es', 'en'] as const) for (const page of pages) {
+    paths.add([lang === 'en' ? 'en' : '', localizedPage(page, lang)].filter(Boolean).join('/'));
+    paths.add([lang, page].filter(Boolean).join('/'));
+    if (lang === 'es') paths.add(page);
+  }
+  paths.delete('');
+  return [...paths].map(path => ({ params: { path } }));
+}
+const route = routeContext(Astro.url.pathname);
+if (Astro.url.pathname !== route.href(route.suffix)) return Astro.redirect(route.href(route.suffix), 301);
+const sections = { bio: Bio, obras: Works, colaboraciones: Collaborations, texto: Text, prensa: Press };
+const Page = route.suffix.startsWith('obras/') ? Work : sections[route.suffix as keyof typeof sections] ?? Home;
+---
+<Page />

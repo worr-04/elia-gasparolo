@@ -31,10 +31,10 @@ class Page(HTMLParser):
         return next((a.get('content', '') for t,a in self.nodes if t == 'meta' and (a.get('name') == key or a.get('http-equiv') == key)), '')
 
 pages = [Page(p) for p in ROOT.rglob('*.html')]
-canonical_page = next(p for p in pages if p.path == ROOT/'es/index.html')
+canonical_page = next(p for p in pages if p.path == ROOT/'index.html')
 canonical = next(a['href'] for t,a in canonical_page.nodes if t == 'link' and a.get('rel') == 'canonical')
 origin = urlparse(canonical).netloc
-base = urlparse(canonical).path.removesuffix('es/')
+base = urlparse(canonical).path
 
 def local_target(url):
     parsed = urlparse(url)
@@ -67,7 +67,7 @@ for page in pages:
         if tag == 'video' and 'controls' in attrs: page.fail('gallery video unexpectedly has controls')
         if tag == 'img' and not all(key in attrs for key in ('alt','width','height')): page.fail('image lacks alt or dimensions')
         if tag == 'a' and attrs.get('target') == '_blank' and 'noopener' not in attrs.get('rel',''): page.fail('unsafe external link')
-        if tag == 'link' and attrs.get('rel') in ('canonical','alternate') and 'Caminografico' in attrs.get('href',''): page.fail('SEO URL points to a proposal')
+        if not redirect and tag == 'link' and attrs.get('rel') in ('canonical','alternate') and 'Caminografico' in attrs.get('href',''): page.fail('SEO URL points to a proposal')
         urls = [attrs[k] for k in ('href','src','poster','data-src') if attrs.get(k)]
         urls += [item.strip().split(' ')[0] for item in attrs.get('srcset','').split(',') if item.strip()]
         for url in urls:
@@ -76,11 +76,14 @@ for page in pages:
             if target is not None and not target.is_file(): page.fail(f'broken local link: {url}')
     if 'Caminografico' in str(page.path) and 'noindex' not in page.meta('robots'): page.fail('proposal is indexable')
 
+page_by_path = {page.path: page for page in pages}
 sitemap = ET.parse(ROOT/'sitemap.xml')
 locations = [node.text for node in sitemap.findall('.//{*}loc')]
 for location in locations:
     target = local_target(location)
     if 'Caminografico' in location or target is None or not target.is_file(): errors.append(f'Invalid sitemap URL: {location}')
+    elif page_by_path[target].meta('refresh'): errors.append(f'Sitemap contains redirect: {location}')
+    if urlparse(location).path.startswith(base + 'es/'): errors.append(f'Spanish URL retains old language prefix: {location}')
 if len(locations) != len(set(locations)): errors.append('Duplicate sitemap URL')
 if errors:
     raise SystemExit('\n'.join(sorted(set(errors))))

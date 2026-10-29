@@ -1,21 +1,28 @@
 ---
-import Home from '../[lang]/index.astro';
-import Bio from '../[lang]/bio/index.astro';
-import Works from '../[lang]/obras/index.astro';
-import Work from '../[lang]/obras/[slug].astro';
-import Collaborations from '../[lang]/colaboraciones/index.astro';
-import Text from '../[lang]/texto/index.astro';
-import Press from '../[lang]/prensa/index.astro';
+import Home from '../../views/pages/index.astro';
+import Bio from '../../views/pages/bio/index.astro';
+import Works from '../../views/pages/obras/index.astro';
+import Work from '../../views/pages/obras/[slug].astro';
+import Collaborations from '../../views/pages/colaboraciones/index.astro';
+import Text from '../../views/pages/texto/index.astro';
+import Press from '../../views/pages/prensa/index.astro';
 import { works } from '../../works-content';
-import { routeContext } from '../../routing';
+import { localizedPage, routeContext } from '../../routing';
 
 export function getStaticPaths() {
   const pages = ['', 'bio', 'obras', 'colaboraciones', 'texto', 'prensa', ...works.map(work => `obras/${work.slug}`)];
-  return ['Caminografico1', 'Caminografico2'].flatMap(proposal =>
-    ['', 'en'].flatMap(lang => pages.map(page => ({ params: { proposal, path: [lang, page].filter(Boolean).join('/') || undefined } })))
-  );
+  return ['Caminografico1', 'Caminografico2'].flatMap(proposal => {
+    const paths = new Set<string>();
+    for (const lang of ['es', 'en'] as const) for (const page of pages) {
+      paths.add([lang === 'en' ? 'en' : '', localizedPage(page, lang)].filter(Boolean).join('/'));
+      paths.add([lang === 'en' ? 'en' : '', page].filter(Boolean).join('/'));
+    }
+    return [...paths].map(path => ({ params: { proposal, path: path || undefined } }));
+  });
 }
-const { suffix } = routeContext(Astro.url.pathname);
+const route = routeContext(Astro.url.pathname);
+if (Astro.url.pathname !== route.href(route.suffix)) return Astro.redirect(route.href(route.suffix), 301);
+const { suffix } = route;
 const sections = { bio: Bio, obras: Works, colaboraciones: Collaborations, texto: Text, prensa: Press };
 const Page = suffix.startsWith('obras/') ? Work : sections[suffix as keyof typeof sections] ?? Home;
 ---

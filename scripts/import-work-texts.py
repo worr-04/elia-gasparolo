@@ -13,6 +13,12 @@ def props(el):
     return {c.tag.removeprefix(W): {k.removeprefix(W):v for k,v in c.attrib.items()} for c in el} if el is not None else {}
 def val(p,k,default=None): return p.get(k,{}).get('val',default)
 def enabled(p,k): return k in p and val(p,k,'1') not in ('0','false','off','none')
+EDITORIAL_REPLACEMENTS = {
+    'cartografias-posibles': {
+        'es': ('Año: 2023', 'Museo de Arte Amalia Lacroze de Fortabat. 2023'),
+        'en': ('Year: 2023', 'Amalia Lacroze de Fortabat Art Museum. 2023.'),
+    },
+}
 OFRENDAS_IMAGES = {
     'foto malbec': ('02.webp', 'Ofrenda Malbec'),
     'bordado malbec': ('03.webp', 'Cielo Ofrenda Malbec'),
@@ -106,8 +112,58 @@ def parse(path, neutral_colors=False, inline_images=None):
         body = re.sub(r'(?:' + empty + r')+$', '', body)
     return {'html':body,'text':'\n'.join(plain),'videos':links,'source':path.name}
 
+def normalize_spacing(body):
+    root = ET.fromstring('<div>' + body + '</div>')
+    result = []
+    pending_gap = False
+    for node in root:
+        if node.tag != 'p':
+            result.append(node)
+            pending_gap = False
+            continue
+        styles = dict(item.split(':', 1) for item in node.get('style', '').split(';') if ':' in item)
+        before = float(re.sub(r'[^0-9.-]', '', styles.get('margin-top', '0')) or 0) > 0
+        after = float(re.sub(r'[^0-9.-]', '', styles.get('margin-bottom', '0')) or 0) > 0
+        if not ''.join(node.itertext()).strip():
+            pending_gap = True
+            continue
+        for prop in ('margin-top', 'margin-bottom', 'line-height'):
+            styles.pop(prop, None)
+        if styles: node.set('style', ';'.join(f'{k}:{v}' for k,v in styles.items()))
+        else: node.attrib.pop('style', None)
+        if result and result[-1].tag == 'p' and (pending_gap or before):
+            node.set('class', 'paragraph-gap')
+        result.append(node)
+        pending_gap = after
+    return ''.join(ET.tostring(node, encoding='unicode', method='xml') for node in result)
+
+SECTION_STARTS = {
+    'tejido-conectivo': {
+        'es': ('Biotextiles con Memoria', 'Tejido Conectivo es una obra'),
+        'en': ('Biotextiles with Memory', 'Connective Tissue (Tejido Conectivo) is a work'),
+    },
+    'los-amantes': {
+        'es': ('Los Amantes: Ellos son dos', 'Pinceladas en la búsqueda'),
+        'en': ('The lovers:', 'Strokes looking for Ensō'),
+    },
+}
+def apply_section_spacing(body, slug, lang):
+    prefixes = SECTION_STARTS.get(slug, {}).get(lang, ())
+    if not prefixes: return body
+    root = ET.fromstring('<div>' + body + '</div>')
+    matched = 0
+    for p in root.findall('p'):
+        text = ' '.join(''.join(p.itertext()).split())
+        if any(text.startswith(prefix) for prefix in prefixes):
+            classes = p.get('class', '').split()
+            if 'section-gap' not in classes: classes.append('section-gap')
+            p.set('class', ' '.join(classes))
+            matched += 1
+    assert matched == len(prefixes), (slug, lang, matched)
+    return ''.join(ET.tostring(node, encoding='unicode', method='xml') for node in root)
+
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('source',type=Path);ap.add_argument('--ofrendas-source',type=Path);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('source',type=Path);ap.add_argument('--ofrendas-source',type=Path);ap.add_argument('--despliegue-source',type=Path);args=ap.parse_args()
     result={}
     dirs=sorted(p for p in args.source.iterdir() if p.is_dir())
     assert len(dirs)==25
@@ -117,7 +173,16 @@ def main():
         spanish=next(f for f in files if norm(f.stem)==norm(es))
         english=next(f for f in files if f!=spanish)
         assert len(files)==2,(d,files)
+        if slug=='fases-y-despliegue' and args.despliegue_source:
+            spanish=args.despliegue_source/'Fases y Despliegue.docx'
+            english=args.despliegue_source/'Phases and Unfolding.docx'
         result[slug]={'es':parse(spanish,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None),'en':parse(english,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None)}
+        for lang, (old, new) in EDITORIAL_REPLACEMENTS.get(slug, {}).items():
+            for field in ('html', 'text'):
+                result[slug][lang][field] = result[slug][lang][field].replace(old, new)
+        if slug != 'trazas':
+            for lang in ('es','en'):
+                result[slug][lang]['html'] = apply_section_spacing(normalize_spacing(result[slug][lang]['html']), slug, lang)
         # Both language versions refer to the same artwork videos.
         videos=list(dict.fromkeys(result[slug]['es']['videos']+result[slug]['en']['videos']))
         if slug=='ofrendas': videos=videos[:1]

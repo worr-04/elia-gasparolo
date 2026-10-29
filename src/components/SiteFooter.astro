@@ -1,11 +1,27 @@
+---
+import { routeContext } from '../routing';
+const { lang } = routeContext(Astro.url.pathname);
+const base = import.meta.env.BASE_URL;
+---
 <footer class="site-footer">
-  <span>Web Design</span><span aria-hidden="true"> — </span><a href="https://www.ninalauria.nyc" target="_blank" rel="noopener noreferrer">www.ninalauria.nyc</a>
+  <nav class="social-links" aria-label={lang === 'es' ? 'Redes sociales' : 'Social media'}>
+    <a href="https://www.facebook.com/elia.gasparolo" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src={`${base}icons/facebook.png`} width="512" height="512" alt="" /></a>
+    <a href="https://www.instagram.com/eliagasparolo/?hl=es-la" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src={`${base}icons/instagram.png`} width="512" height="512" alt="" /></a>
+    <a href="https://www.youtube.com/user/eliagasparolo/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 7.2a3 3 0 0 0-2.1-2.1C18 4.6 12 4.6 12 4.6s-6 0-7.9.5A3 3 0 0 0 2 7.2 31 31 0 0 0 1.5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8Z" /><path class="play" d="m10 8.5 6 3.5-6 3.5Z" /></svg></a>
+  </nav>
+  <span class="design-credit">Web Design<span aria-hidden="true"> — </span><a href="https://www.ninalauria.nyc" target="_blank" rel="noopener noreferrer">www.ninalauria.nyc</a></span>
 </footer>
-
 <style>
-  .site-footer { flex-shrink: 0; color: var(--muted); font-size: .625rem; font-weight: 400; line-height: 1.5; padding: .75rem 3vw 1rem; text-align: right; }
+  .site-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1rem; flex-shrink: 0; color: var(--muted); font-size: .625rem; font-weight: 400; line-height: 1.5; padding: .75rem 3vw 1rem; }
+  .social-links { grid-column: 2; display: flex; align-items: center; gap: .9rem; color: var(--ink); }
+  .social-links a { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; }
+  .social-links img, .social-links svg { display: block; width: 1rem; height: 1rem; }
+  .social-links svg { fill: currentColor; }
+  .social-links .play { fill: var(--canvas); }
+  .social-links a:hover { opacity: .6; }
+  .design-credit { grid-column: 3; justify-self: end; text-align: right; }
   a:hover, a:focus-visible { color: var(--ink); }
   :global([data-variant="2"]) .site-footer { margin-left: 20%; width: 80%; padding-right: var(--sidebar-edge-space); }
   @media (max-width: 899px) { :global([data-variant="2"]) .site-footer { margin-left: 0; width: 100%; } }
-  @media (max-width: 600px) { .site-footer { padding-inline: 4vw; } }
+  @media (max-width: 600px) { .site-footer { grid-template-columns: 1fr; padding-inline: 4vw; } .social-links { grid-column: 1; justify-self: center; } .design-credit { grid-column: 1; justify-self: center; text-align: center; } }
 </style>

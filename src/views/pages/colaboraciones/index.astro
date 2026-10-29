@@ -3,6 +3,9 @@ interface Props {}
 import { routeContext } from "../../../routing";
 import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import VideoLink from '../../../components/VideoLink.astro';
+import { externalVideoCovers, externalVideoDescriptions } from '../../../work-resources';
+import imageSizes from '../../../work-image-sizes.json';
 import { designContent } from '../../../design-content';
 import { isLanguage, languages, type Language } from '../../../i18n';
 import altar01 from '../../../assets/design-realization/altar-01.webp';
@@ -44,6 +47,8 @@ export function getStaticPaths() {
 const requestedLang = routeContext(Astro.url.pathname).lang;
 const lang: Language = isLanguage(requestedLang) ? requestedLang : 'es';
 const t = designContent[lang];
+const base = import.meta.env.BASE_URL;
+const dimensions: Record<string, number[]> = imageSizes;
 const projects = [
   ['gutsies2026', [gutsies20261, gutsies20262, gutsies20263]],
   ['gutsies2025', [gutsies20251, gutsies20252, gutsies20253]],
@@ -73,7 +78,7 @@ const projects = [
               <h2 id={`${id}-title`}>{project.title}</h2>
               {project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
               <p class="credit">{project.credit}{project.year && `, ${project.year}`}</p>
-              {project.videoUrl && <a class="video-link" href={project.videoUrl} target="_blank" rel="noopener noreferrer">{t.videoLabel}</a>}
+              {project.videoUrl && <div class="project-video"><VideoLink href={project.videoUrl} image={externalVideoCovers[id] ? `${base}${externalVideoCovers[id]}` : images[0].src} width={externalVideoCovers[id] ? dimensions[externalVideoCovers[id]][0] : images[0].width} height={externalVideoCovers[id] ? dimensions[externalVideoCovers[id]][1] : images[0].height} description={externalVideoDescriptions[id]?.[lang] ?? (lang === 'es' ? `Video de ${project.title}` : `${project.title} video`)} /></div>}
             </div>
 
             <div class="gallery">
@@ -110,7 +115,7 @@ const projects = [
   p { font-size: clamp(.78rem, .82vw, .92rem); line-height: 1.6; margin: 0; }
   p + p { margin-top: 1rem; }
   .credit { font-size: .72rem; line-height: 1.5; margin-top: 1.4rem; }
-  .video-link { border-bottom: 1px solid currentColor; display: inline-block; font-size: .75rem; margin-top: 1.4rem; padding-bottom: .15rem; }
+  .project-video { margin-top: 4rem; }
   .gallery { align-items: start; display: grid; gap: clamp(.75rem, 1.5vw, 1.5rem); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gallery-column { align-content: start; display: grid; gap: clamp(.75rem, 1.5vw, 1.5rem); }
   figure { margin: 0; }

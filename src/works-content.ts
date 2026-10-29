@@ -87,8 +87,8 @@ export const works: Work[] = [
     "id": "05",
     "slug": "fases-y-despliegue",
     "title": {
-      "es": "Fases y Despliegue",
-      "en": "Phases and Unfolding"
+      "es": "Despliegue y Fases",
+      "en": "Unfolding and Phases"
     },
     "images": [
       "works/fases-y-despliegue/01.webp",

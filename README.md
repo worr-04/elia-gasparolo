@@ -1,8 +1,8 @@
 # Elia Gasparolo
 
-Portfolio bilingüe estático en Astro. La versión principal usa el header superior.
+Portfolio bilingüe estático en Astro. Español en la raíz e inglés en `/en/`, con rutas traducidas y redirecciones desde las URLs anteriores. La versión principal usa el header superior.
 Las rutas `/Caminografico1/` y `/Caminografico2/` se conservan para revisar las propuestas,
-con `noindex` y URLs canónicas hacia `/es/` y `/en/`.
+con `noindex` y URLs canónicas hacia `/` y `/en/`.
 
 ## Desarrollo y validación
 
@@ -24,10 +24,12 @@ GitHub Actions ejecuta build y verify antes de publicar un push a `main`.
 
 ## Contenidos
 
-- Home: selección explícita en `src/pages/[lang]/index.astro`, imágenes en `src/assets/home-final/`.
+- Home: selección explícita en `src/views/pages/index.astro`, imágenes en `src/assets/home-final/`.
 - Obras y orden: `src/works-content.ts`. Textos con formato y enlaces al pie: `src/work-texts.json`.
   Para reimportarlos desde los Word: `python3 scripts/import-work-texts.py "/ruta/Obras actualizacion"`.
   El texto actualizado de Ofrendas, con imágenes intercaladas, puede indicarse con `--ofrendas-source "/ruta/ofrendas"`.
+  Los Word nuevos de Despliegue y Fases se indican con `--despliegue-source "/ruta/descargas"`.
+- Catálogos y tarjetas de video: `src/work-resources.ts`.
 - Portadas: `src/work-covers.ts`; dimensiones originales: `src/work-image-sizes.json`.
 - Biografía y navegación: `src/i18n.ts`.
 - Diseño, textos y prensa: sus archivos `src/*-content.ts`.

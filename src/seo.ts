@@ -1,4 +1,5 @@
 import type { Language } from './i18n';
+import { localizedPath } from './routing';
 
 const descriptions: Record<Language, Record<string, string>> = {
   es: {
@@ -20,6 +21,6 @@ const descriptions: Record<Language, Record<string, string>> = {
 };
 
 export const sectionDescription = (lang: Language, suffix: string) => descriptions[lang][suffix] ?? descriptions[lang][''];
-export const canonicalPath = (base: string, lang: Language, suffix = '') => `${base}${lang}/${suffix ? `${suffix}/` : ''}`;
+export const canonicalPath = localizedPath;
 // Escape markup delimiters before inserting JSON into an HTML script element.
 export const serializeJsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c');

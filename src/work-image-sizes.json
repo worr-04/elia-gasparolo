@@ -670,5 +670,29 @@
   "works/ofrendas/10.webp": [
     964,
     1280
+  ],
+  "works/ofrendas/performance-sonora.webp": [
+    1280,
+    720
+  ],
+  "video-covers/transitos.webp": [
+    1280,
+    720
+  ],
+  "video-covers/tejido-conectivo.webp": [
+    480,
+    360
+  ],
+  "video-covers/intocable.webp": [
+    1920,
+    1440
+  ],
+  "video-covers/rabdomante.webp": [
+    1920,
+    1440
+  ],
+  "video-covers/el-futuro-es-prehistoria.webp": [
+    1920,
+    1440
   ]
 }
