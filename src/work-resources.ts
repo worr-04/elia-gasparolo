@@ -8,7 +8,7 @@ export const externalVideoCovers: Record<string, string> = {
   transitos: 'video-covers/transitos.webp',
   'tejido-conectivo': 'video-covers/tejido-conectivo.webp',
   intocable: 'video-covers/intocable.webp',
-  rabdomante: 'video-covers/rabdomante.webp',
+  rabdomante: 'video-covers/rabdomante-cdee3a41.webp',
 };
 
 export const externalVideoDescriptions: Record<string, Record<Language, string>> = {
