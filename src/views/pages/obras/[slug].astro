@@ -35,7 +35,7 @@ const slides = (work.gallery ?? [
   return { ...video, type: 'video' as const };
 });
 const text = (workTexts as Record<string, Record<string, { html: string; text: string; links: { url: string; kind: string }[] }>>)[work.slug][lang];
-const catalogue = workCatalogues[work.slug];
+const catalogue = workCatalogues[work.slug]?.[lang];
 const videoLinks = externalWorkVideos[work.slug] ?? text.links.filter(link => link.kind === 'video').map(link => ({
   url: link.url,
   image: externalVideoCovers[work.slug] ?? workCovers[work.slug],
@@ -74,7 +74,7 @@ const websiteLinks = text.links.filter(link => link.kind !== 'video');
     </div>
     </div>
     <div class="work-text">
-      {catalogue && <a class="catalogue-link" href={`${base}${catalogue}`} download>
+      {catalogue && <a class="catalogue-link" href={`${base}${catalogue}`} target="_blank" rel="noopener noreferrer">
         <img src={`${base}icons/pdf.png`} width="512" height="512" alt="" />
         <span>{lang === 'es' ? 'Descargar Catálogo de Tránsitos' : 'Download Transits Catalogue'}</span>
       </a>}

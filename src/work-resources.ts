@@ -1,7 +1,10 @@
 import type { Language } from './i18n';
 
-export const workCatalogues: Record<string, string> = {
-  transitos: 'catalogos/transitos-elia-gasparolo.pdf',
+export const workCatalogues: Record<string, Record<Language, string>> = {
+  transitos: {
+    es: 'catalogos/transitos-elia-gasparolo.pdf',
+    en: 'catalogos/transits-elia-gasparolo-en.pdf',
+  },
 };
 
 export const externalVideoCovers: Record<string, string> = {

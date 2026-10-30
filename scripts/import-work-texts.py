@@ -15,8 +15,8 @@ def val(p,k,default=None): return p.get(k,{}).get('val',default)
 def enabled(p,k): return k in p and val(p,k,'1') not in ('0','false','off','none')
 EDITORIAL_REPLACEMENTS = {
     'cartografias-posibles': {
-        'es': ('Año: 2023', 'Museo de Arte Amalia Lacroze de Fortabat. 2023'),
-        'en': ('Year: 2023', 'Amalia Lacroze de Fortabat Art Museum. 2023.'),
+        'es': ('Año: 2023', 'Año: 2023\nMuseo de Arte Amalia Lacroze de Fortabat. 2023'),
+        'en': ('Year: 2023', 'Year: 2023\nAmalia Lacroze de Fortabat Art Museum. 2023.'),
     },
 }
 OFRENDAS_IMAGES = {
@@ -179,7 +179,7 @@ def main():
         result[slug]={'es':parse(spanish,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None),'en':parse(english,slug=='ofrendas',OFRENDAS_IMAGES if slug=='ofrendas' else None)}
         for lang, (old, new) in EDITORIAL_REPLACEMENTS.get(slug, {}).items():
             for field in ('html', 'text'):
-                result[slug][lang][field] = result[slug][lang][field].replace(old, new)
+                result[slug][lang][field] = result[slug][lang][field].replace(old, new.replace('\n', '<br />') if field == 'html' else new)
         if slug != 'trazas':
             for lang in ('es','en'):
                 result[slug][lang]['html'] = apply_section_spacing(normalize_spacing(result[slug][lang]['html']), slug, lang)

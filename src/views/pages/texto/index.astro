@@ -19,6 +19,7 @@ const { lang: langParam } = routeContext(Astro.url.pathname);
 const lang = isLanguage(langParam) ? langParam : 'es';
 const copy = textContent[lang];
 const base = import.meta.env.BASE_URL;
+const orderedTexts = [...textItems].sort((a, b) => Number(b.year) - Number(a.year));
 const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas, reliquias } as const;
 ---
 
@@ -27,7 +28,7 @@ const images = { destellos, 'memoria-fragmentada': memoriaFragmentada, ofrendas,
     <h1 class="section-title">{copy.title}</h1>
 
     <div class="texts-list">
-      {textItems.map((item) => {
+      {orderedTexts.map((item) => {
         const image = images[item.image as keyof typeof images];
         return (
           <article class="text-item">
