@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Validate website
 
 on:
   push:
@@ -16,7 +16,6 @@ jobs:
   build:
     permissions:
       contents: read
-      pages: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,22 +28,3 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run verify
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: false
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

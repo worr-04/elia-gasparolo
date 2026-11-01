@@ -3,8 +3,7 @@ interface Props {}
 import { routeContext } from "../../../routing";
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { copy, isLanguage, languages } from '../../../i18n';
-import imageSizes from '../../../work-image-sizes.json';
-import { workCovers } from '../../../work-covers';
+import thumbnails from '../../../work-thumbnails.json';
 import { works } from '../../../works-content';
 
 export function getStaticPaths() {
@@ -13,7 +12,7 @@ export function getStaticPaths() {
 
 const { lang: langParam } = routeContext(Astro.url.pathname);
 const lang = isLanguage(langParam) ? langParam : 'es';
-const dimensions: Record<string, number[]> = imageSizes;
+const covers: Record<string, { src: string; width: number; height: number }[]> = thumbnails;
 const base = import.meta.env.BASE_URL;
 const route = routeContext(Astro.url.pathname);
 ---
@@ -24,13 +23,20 @@ const route = routeContext(Astro.url.pathname);
 
     <div class="works-layout">
       <div class="works-grid">
-        {works.map((work, index) => (
+        {works.map((work, index) => {
+          const variants = covers[work.slug];
+          const fallback = variants[1];
+          return (
           <article class="work-card" data-work={work.slug}>
             <a class="work-image" href={route.href(`obras/${work.slug}`)} aria-label={work.title[lang]} data-work-trigger={work.slug}>
-              <img width={dimensions[workCovers[work.slug]][0]} height={dimensions[workCovers[work.slug]][1]} decoding="async" src={`${base}${workCovers[work.slug]}`} alt={work.title[lang]} loading={index < 6 ? 'eager' : 'lazy'} />
+              <img width={fallback.width} height={fallback.height} decoding="async"
+                src={`${base}${fallback.src}`}
+                srcset={variants.map(image => `${base}${image.src} ${image.width}w`).join(', ')}
+                sizes="(max-width: 600px) 46vw, (max-width: 1100px) 30vw, (max-width: 1760px) 26vw, 460px"
+                alt={work.title[lang]} loading={index < 3 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
             </a>
           </article>
-        ))}
+        );})}
       </div>
 
       <aside class="works-index" aria-label={copy[lang].navigation.works}>

@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://worr-04.github.io',
-  base: '/elia-gasparolo',
+  site: 'https://eliagasparolo.com',
+  base: '/',
   output: 'static',
   security: {
     csp: {

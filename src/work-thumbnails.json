@@ -1,0 +1,427 @@
+{
+  "reliquias": [
+    {
+      "src": "work-thumbnails/reliquias-1bf9c82c41-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/reliquias-1bf9c82c41-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/reliquias-1bf9c82c41-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "la-propension": [
+    {
+      "src": "work-thumbnails/la-propension-2b773f7cf6-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/la-propension-2b773f7cf6-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/la-propension-2b773f7cf6-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "la-complicidad-de-los-dupiones": [
+    {
+      "src": "work-thumbnails/la-complicidad-de-los-dupiones-31228d5451-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/la-complicidad-de-los-dupiones-31228d5451-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/la-complicidad-de-los-dupiones-31228d5451-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "trazas": [
+    {
+      "src": "work-thumbnails/trazas-36e3d75cf2-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/trazas-36e3d75cf2-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/trazas-36e3d75cf2-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "fases-y-despliegue": [
+    {
+      "src": "work-thumbnails/fases-y-despliegue-fdcea6765a-320.webp",
+      "width": 320,
+      "height": 229
+    },
+    {
+      "src": "work-thumbnails/fases-y-despliegue-fdcea6765a-640.webp",
+      "width": 640,
+      "height": 458
+    },
+    {
+      "src": "work-thumbnails/fases-y-despliegue-fdcea6765a-960.webp",
+      "width": 960,
+      "height": 687
+    }
+  ],
+  "derivas": [
+    {
+      "src": "work-thumbnails/derivas-bbb038ec2b-320.webp",
+      "width": 320,
+      "height": 200
+    },
+    {
+      "src": "work-thumbnails/derivas-bbb038ec2b-640.webp",
+      "width": 640,
+      "height": 401
+    },
+    {
+      "src": "work-thumbnails/derivas-bbb038ec2b-960.webp",
+      "width": 960,
+      "height": 601
+    }
+  ],
+  "transitos": [
+    {
+      "src": "work-thumbnails/transitos-762f7f63e7-320.webp",
+      "width": 320,
+      "height": 228
+    },
+    {
+      "src": "work-thumbnails/transitos-762f7f63e7-640.webp",
+      "width": 640,
+      "height": 455
+    },
+    {
+      "src": "work-thumbnails/transitos-762f7f63e7-960.webp",
+      "width": 960,
+      "height": 683
+    }
+  ],
+  "ofrendas": [
+    {
+      "src": "work-thumbnails/ofrendas-622d90c011-320.webp",
+      "width": 320,
+      "height": 240
+    },
+    {
+      "src": "work-thumbnails/ofrendas-622d90c011-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "work-thumbnails/ofrendas-622d90c011-960.webp",
+      "width": 960,
+      "height": 720
+    }
+  ],
+  "tejido-conectivo": [
+    {
+      "src": "work-thumbnails/tejido-conectivo-089918af10-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/tejido-conectivo-089918af10-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/tejido-conectivo-089918af10-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "instalacion-tejido-conectivo": [
+    {
+      "src": "work-thumbnails/instalacion-tejido-conectivo-160af814c7-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/instalacion-tejido-conectivo-160af814c7-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/instalacion-tejido-conectivo-160af814c7-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "luz-ambar": [
+    {
+      "src": "work-thumbnails/luz-ambar-4ef83d2862-320.webp",
+      "width": 320,
+      "height": 217
+    },
+    {
+      "src": "work-thumbnails/luz-ambar-4ef83d2862-640.webp",
+      "width": 640,
+      "height": 434
+    },
+    {
+      "src": "work-thumbnails/luz-ambar-4ef83d2862-960.webp",
+      "width": 960,
+      "height": 651
+    }
+  ],
+  "tejido-conectivo-ii": [
+    {
+      "src": "work-thumbnails/tejido-conectivo-ii-09c6cc5f07-320.webp",
+      "width": 320,
+      "height": 213
+    },
+    {
+      "src": "work-thumbnails/tejido-conectivo-ii-09c6cc5f07-640.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "work-thumbnails/tejido-conectivo-ii-09c6cc5f07-960.webp",
+      "width": 960,
+      "height": 640
+    }
+  ],
+  "algol-eclipse": [
+    {
+      "src": "work-thumbnails/algol-eclipse-237ea84bf6-320.webp",
+      "width": 320,
+      "height": 366
+    },
+    {
+      "src": "work-thumbnails/algol-eclipse-237ea84bf6-640.webp",
+      "width": 640,
+      "height": 732
+    },
+    {
+      "src": "work-thumbnails/algol-eclipse-237ea84bf6-960.webp",
+      "width": 960,
+      "height": 1098
+    }
+  ],
+  "avyakta": [
+    {
+      "src": "work-thumbnails/avyakta-f02d2788cd-320.webp",
+      "width": 320,
+      "height": 237
+    },
+    {
+      "src": "work-thumbnails/avyakta-f02d2788cd-640.webp",
+      "width": 640,
+      "height": 475
+    },
+    {
+      "src": "work-thumbnails/avyakta-f02d2788cd-960.webp",
+      "width": 960,
+      "height": 712
+    }
+  ],
+  "gravitacion": [
+    {
+      "src": "work-thumbnails/gravitacion-163dd854f3-320.webp",
+      "width": 320,
+      "height": 240
+    },
+    {
+      "src": "work-thumbnails/gravitacion-163dd854f3-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "work-thumbnails/gravitacion-163dd854f3-960.webp",
+      "width": 960,
+      "height": 720
+    }
+  ],
+  "sirio-el-ojo-en-el-cielo": [
+    {
+      "src": "work-thumbnails/sirio-el-ojo-en-el-cielo-a2c11ffc96-320.webp",
+      "width": 320,
+      "height": 492
+    },
+    {
+      "src": "work-thumbnails/sirio-el-ojo-en-el-cielo-a2c11ffc96-640.webp",
+      "width": 640,
+      "height": 983
+    },
+    {
+      "src": "work-thumbnails/sirio-el-ojo-en-el-cielo-a2c11ffc96-960.webp",
+      "width": 960,
+      "height": 1475
+    }
+  ],
+  "messier-m22-m30": [
+    {
+      "src": "work-thumbnails/messier-m22-m30-70a7da3849-320.webp",
+      "width": 320,
+      "height": 224
+    },
+    {
+      "src": "work-thumbnails/messier-m22-m30-70a7da3849-640.webp",
+      "width": 640,
+      "height": 447
+    },
+    {
+      "src": "work-thumbnails/messier-m22-m30-70a7da3849-960.webp",
+      "width": 960,
+      "height": 671
+    }
+  ],
+  "cartografias-posibles": [
+    {
+      "src": "work-thumbnails/cartografias-posibles-da08b56d38-320.webp",
+      "width": 320,
+      "height": 228
+    },
+    {
+      "src": "work-thumbnails/cartografias-posibles-da08b56d38-640.webp",
+      "width": 640,
+      "height": 457
+    },
+    {
+      "src": "work-thumbnails/cartografias-posibles-da08b56d38-960.webp",
+      "width": 954,
+      "height": 681
+    }
+  ],
+  "el-futuro-es-prehistoria": [
+    {
+      "src": "work-thumbnails/el-futuro-es-prehistoria-c61ec428bf-320.webp",
+      "width": 320,
+      "height": 240
+    },
+    {
+      "src": "work-thumbnails/el-futuro-es-prehistoria-c61ec428bf-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "work-thumbnails/el-futuro-es-prehistoria-c61ec428bf-960.webp",
+      "width": 960,
+      "height": 720
+    }
+  ],
+  "intocable": [
+    {
+      "src": "work-thumbnails/intocable-281fcc1b34-320.webp",
+      "width": 320,
+      "height": 205
+    },
+    {
+      "src": "work-thumbnails/intocable-281fcc1b34-640.webp",
+      "width": 640,
+      "height": 411
+    },
+    {
+      "src": "work-thumbnails/intocable-281fcc1b34-960.webp",
+      "width": 960,
+      "height": 616
+    }
+  ],
+  "destellos-de-naturaleza": [
+    {
+      "src": "work-thumbnails/destellos-de-naturaleza-b897e32f56-320.webp",
+      "width": 320,
+      "height": 181
+    },
+    {
+      "src": "work-thumbnails/destellos-de-naturaleza-b897e32f56-640.webp",
+      "width": 640,
+      "height": 361
+    },
+    {
+      "src": "work-thumbnails/destellos-de-naturaleza-b897e32f56-960.webp",
+      "width": 960,
+      "height": 542
+    }
+  ],
+  "paisajes-posibles": [
+    {
+      "src": "work-thumbnails/paisajes-posibles-544c99af4e-320.webp",
+      "width": 320,
+      "height": 240
+    },
+    {
+      "src": "work-thumbnails/paisajes-posibles-544c99af4e-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "work-thumbnails/paisajes-posibles-544c99af4e-960.webp",
+      "width": 960,
+      "height": 720
+    }
+  ],
+  "entonces-la-proteccion": [
+    {
+      "src": "work-thumbnails/entonces-la-proteccion-72a230ad50-320.webp",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "src": "work-thumbnails/entonces-la-proteccion-72a230ad50-640.webp",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "src": "work-thumbnails/entonces-la-proteccion-72a230ad50-960.webp",
+      "width": 960,
+      "height": 540
+    }
+  ],
+  "los-amantes": [
+    {
+      "src": "work-thumbnails/los-amantes-06febace0e-320.webp",
+      "width": 320,
+      "height": 320
+    },
+    {
+      "src": "work-thumbnails/los-amantes-06febace0e-640.webp",
+      "width": 640,
+      "height": 639
+    },
+    {
+      "src": "work-thumbnails/los-amantes-06febace0e-960.webp",
+      "width": 886,
+      "height": 885
+    }
+  ],
+  "the-right-to-memory": [
+    {
+      "src": "work-thumbnails/the-right-to-memory-92381f2eb6-320.webp",
+      "width": 320,
+      "height": 217
+    },
+    {
+      "src": "work-thumbnails/the-right-to-memory-92381f2eb6-640.webp",
+      "width": 640,
+      "height": 434
+    },
+    {
+      "src": "work-thumbnails/the-right-to-memory-92381f2eb6-960.webp",
+      "width": 960,
+      "height": 652
+    }
+  ]
+}
